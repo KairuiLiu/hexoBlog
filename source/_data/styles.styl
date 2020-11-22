@@ -1,0 +1,123 @@
+.post{
+   margin-top: 60px;
+   margin-bottom: 60px;
+   padding: 25px;
+   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
+
+body > main > div.main-inner.post.posts-expand > div.post-block.animated.fadeIn{
+   padding-top: 20px;
+}
+
+* {
+    cursor: url("https://liukairuicc-1256424792.cos.ap-nanjing.myqcloud.com/pointer.ico"),auto!important
+}
+a:hover {
+    cursor: url("https://liukairuicc-1256424792.cos.ap-nanjing.myqcloud.com/link.ico"),auto!important
+}
+
+.post-eof{
+  background:rgba(0,0,0,0);
+  margin-bottom:0;
+}
+
+body > main > div.main-inner.index.posts-expand > div > article{
+  padding:30px 30px 0;
+  -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+  -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
+
+body > main > div.main-inner.index.posts-expand > div{
+  margin-bottom:60px;
+}
+
+body > main > div.main-inner.index.posts-expand > div:nth-child(10)>article{
+  padding-bottom:81px;
+}
+
+body > main > div.main-inner.index.posts-expand > div:nth-child(10){
+  margin-bottom:-40px!important;
+}
+
+body > main > div.main-inner.index.posts-expand{
+  padding:0;
+}
+
+.sidebar {
+  box-shadow: none;
+}
+
+.wobbleTransparentBK{
+  background-color: rgba(0,0,0,0) !important;
+}
+
+.wobbleTransparentLine{
+  border-color: rgba(0,0,0,0) !important;
+}
+
+//Next.Muse中为Header和Footer添加背景色注意夜间模式
+body>main>header{
+  background-color: rgb(245, 245, 245) !important;
+  if (hexo-config('darkmode')) {
+    @media (prefers-color-scheme: dark) {
+      background-color: rgb(46, 46, 46) !important;
+    }
+  }
+}
+
+body>footer {
+  background-color: rgb(245, 245, 245) !important;
+  if (hexo-config('darkmode')) {
+    @media (prefers-color-scheme: dark) {
+      background-color: rgb(46, 46, 46) !important;
+    }
+  }
+}
+
+//防止sidebar和footer同时开启动效时堆叠异常
+#sidebar, header {
+  z-index: 1 !important;
+}
+
+//防止挡住页末文章的阅读全文按钮
+.main {
+  padding-bottom: 50px;
+}
+
+body > footer > div > div.copyright > span.author::after{
+    content: '|';
+    margin: 0 0.5em;
+}
+
+.site-pv #busuanzi_value_site_pv{
+  color: #1890ff !important;
+}
+
+.site-uv #busuanzi_value_site_uv{
+  color: #1890ff !important;
+}
+
+.site-uv #busuanzi_value_site_uv::before{
+  content: '我的第';
+  margin: 0 0.3em;
+  color:#999 !important;
+}
+
+.site-pv #busuanzi_value_site_pv::before {
+  content: '位朋友，历经';
+  margin: 0 0.3em 0 0;
+  color:#999 !important;
+}
+
+.site-pv #busuanzi_value_site_pv::after{
+  content: '次回眸才与你相遇';
+  color:#999 !important;
+  margin: 0 0.3em;
+}
+
+.footer-inner #busuanzi_container_site_pv::before{
+  content:"";
+  margin: 0;
+  display:none;
+}

@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+  <script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"liukairui.cc","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="每一个二进制文件在编码的时候会为自己的文件加入相应格式的文件头，我们可以通过分析文件头获得文件可能的类型(扩展名)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见的文件头格式">
+<meta property="og:url" content="http://liukairui.cc/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/index.html">
+<meta property="og:site_name" content="LiuKairui Blog">
+<meta property="og:description" content="每一个二进制文件在编码的时候会为自己的文件加入相应格式的文件头，我们可以通过分析文件头获得文件可能的类型(扩展名)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-30T16:00:14.000Z">
+<meta property="article:modified_time" content="2020-11-15T18:05:00.348Z">
+<meta property="article:author" content="LiuKairui">
+<meta property="article:tag" content="文件头">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://liukairui.cc/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script> 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "谢谢离开" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "欢迎归来" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+<script>
+
+    var endlineInterval=setInterval(function(){
+      if(!document.querySelector(".liukairuipostendline")){
+        $("body > main > div.main-inner.post.posts-expand > div.post-block.animated.fadeIn > article > div.popular-posts-header").prepend('<div class="liukairuipostendline" style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-coffee"></i>感谢您的阅读-------------</div>');
+      }
+    },2000);
+
+</script>
+
+  <title>常见的文件头格式 | LiuKairui Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="LiuKairui Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">LiuKairui Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-杂">
+
+    <a href="/miscellaneous/" rel="section"><i class="fa fa-ghost fa-fw"></i>杂</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/messageBoard/" rel="section"><i class="fab fa-facebook-messenger fa-fw"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+  <script>
+    //只在桌面版网页启用特效 记得同步到body-end.njk
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('body>main>header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        //
+        //  $('body>main>header>aside').wobbleWindow({
+        //    radius: 50,
+        //    movementLeft: false,
+        //    movementTop: false,
+        //    movementBottom: false,
+        //    position: 'fixed',
+        //    debug: false,
+        //  });
+        //
+
+        
+          $('body>footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+      });
+    }
+
+  </script>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8EUltra%EF%BC%8Dedit-32%E4%B8%AD%E6%8F%90%E5%8F%96%E5%87%BA%E6%9D%A5%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">1. 从Ultra－edit-32中提取出来的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BB%8Ewinhex%E4%B8%AD%E5%8F%96%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E5%88%97%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">2. 从winhex中取出的文件头列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%90%84%E7%A7%8D%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%87%E5%BF%97%E4%BD%8D%E8%AF%A6%E7%BB%86%E5%88%97%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">3.各种文件类型文件头标志位详细列表</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiuKairui"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">LiuKairui</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KairuiLiu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KairuiLiu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tclkr@live.com" title="E-Mail → mailto:tclkr@live.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=oaf3ToOlN17hr5sHV98bT8qxsNYGaw5L&noverify=0" title="QQ → https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;oaf3ToOlN17hr5sHV98bT8qxsNYGaw5L&amp;noverify&#x3D;0" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://liukairui.blog.csdn.net/" title="CSDN → https:&#x2F;&#x2F;liukairui.blog.csdn.net" rel="noopener" target="_blank"><i class="fab fa-cuttlefish fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://liukairui.me/" title="Another Site → http:&#x2F;&#x2F;liukairui.me" rel="noopener" target="_blank"><i class="fa fa-globe fa-fw"></i>Another Site</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://paste.ubuntu.com/" title="https:&#x2F;&#x2F;paste.ubuntu.com&#x2F;" rel="noopener" target="_blank">Ubuntu Pastebin</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://send.firefox.com/" title="https:&#x2F;&#x2F;send.firefox.com&#x2F;" rel="noopener" target="_blank">Firefox Send</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.godder.top/" title="https:&#x2F;&#x2F;blog.godder.top&#x2F;" rel="noopener" target="_blank">朽木自雕</a>
+        </li>
+    </ul>
+  </div>
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7JavaScript%E8%BF%9B%E9%98%B6%E7%89%88%E7%AC%94%E8%AE%B0/" title="尚硅谷 JavaScript 进阶版笔记" target="_blank">尚硅谷 JavaScript 进阶版笔记</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7JavaScript%E5%9F%BA%E7%A1%80%E7%89%88%E7%AC%94%E8%AE%B0/" title="尚硅谷 JavaScript 基础版笔记" target="_blank">尚硅谷 JavaScript 基础版笔记</a>
+          </li>
+        
+          <li>
+            <a href="/C%E8%AF%AD%E8%A8%80switch%E7%9A%84%E8%8C%83%E5%9B%B4%E5%88%A4%E6%96%AD%E8%A1%A8%E8%BE%BE%E6%B3%95/" title="C语言switch的范围判断表达法" target="_blank">C语言switch的范围判断表达法</a>
+          </li>
+        
+          <li>
+            <a href="/Html5%E7%9A%84%E9%9F%B3%E8%A7%86%E9%A2%91%E6%A0%87%E7%AD%BE%E4%B8%8E%E6%96%B0%E5%A2%9E%E5%86%B7%E9%97%A8%E6%A0%87%E7%AD%BE/" title="Html5的音视频标签与新增冷门标签" target="_blank">Html5的音视频标签与新增冷门标签</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7Canvas%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="尚硅谷Canvas学习笔记" target="_blank">尚硅谷Canvas学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://liukairui.cc/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="LiuKairui">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LiuKairui Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常见的文件头格式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-31 00:00:14" itemprop="dateCreated datePublished" datetime="2020-10-31T00:00:14+08:00">2020-10-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-16 02:05:00" itemprop="dateModified" datetime="2020-11-16T02:05:00+08:00">2020-11-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84/" itemprop="url" rel="index"><span itemprop="name">杂七杂八的</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84/%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">文件头格式</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/" class="post-meta-item leancloud_visitors" data-flag-title="常见的文件头格式" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">每一个二进制文件在编码的时候会为自己的文件加入相应格式的文件头，我们可以通过分析文件头获得文件可能的类型(扩展名)</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>可直接进行文件格式分析的小工具：<a target="_blank" rel="noopener" href="https://download.csdn.net/download/Liukairui/12347994">
+</a></p>
+<h2 id="1-从Ultra－edit-32中提取出来的"><a href="#1-从Ultra－edit-32中提取出来的" class="headerlink" title="1. 从Ultra－edit-32中提取出来的"></a>1. 从Ultra－edit-32中提取出来的</h2><table>
+<thead>
+<tr>
+<th>文件格式</th>
+<th>文件头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JPEG (jpg)</td>
+<td>FFD8FF</td>
+</tr>
+<tr>
+<td>PNG (png)</td>
+<td>89504E47</td>
+</tr>
+<tr>
+<td>GIF (gif)</td>
+<td>47494638</td>
+</tr>
+<tr>
+<td>TIFF (tif)</td>
+<td>49492A00</td>
+</tr>
+<tr>
+<td>Windows Bitmap (bmp)</td>
+<td>424D</td>
+</tr>
+<tr>
+<td>CAD (dwg)</td>
+<td>41433130</td>
+</tr>
+<tr>
+<td>Adobe Photoshop (psd)</td>
+<td>38425053</td>
+</tr>
+<tr>
+<td>Rich Text Format (rtf)</td>
+<td>7B5C727466</td>
+</tr>
+<tr>
+<td>XML (xml)</td>
+<td>3C3F786D6C</td>
+</tr>
+<tr>
+<td>HTML (html)</td>
+<td>68746D6C3E</td>
+</tr>
+<tr>
+<td>Email [thorough only] (eml)</td>
+<td>44656C69766572792D646174653A</td>
+</tr>
+<tr>
+<td>Outlook Express (dbx)</td>
+<td>CFAD12FEC5FD746F</td>
+</tr>
+<tr>
+<td>Outlook (pst)</td>
+<td>2142444E</td>
+</tr>
+<tr>
+<td>MS Word/Excel (xls.or.doc)</td>
+<td>D0CF11E0</td>
+</tr>
+<tr>
+<td>MS Access (mdb)</td>
+<td>5374616E64617264204A</td>
+</tr>
+<tr>
+<td>WordPerfect (wpd)</td>
+<td>FF575043</td>
+</tr>
+<tr>
+<td>Postscript (eps.or.ps)</td>
+<td>252150532D41646F6265</td>
+</tr>
+<tr>
+<td>Adobe Acrobat (pdf)</td>
+<td>255044462D312E</td>
+</tr>
+<tr>
+<td>Quicken (qdf)</td>
+<td>AC9EBD8F</td>
+</tr>
+<tr>
+<td>Windows Password (pwl)</td>
+<td>E3828596</td>
+</tr>
+<tr>
+<td>ZIP Archive (zip)</td>
+<td>504B0304</td>
+</tr>
+<tr>
+<td>RAR Archive (rar)</td>
+<td>52617221</td>
+</tr>
+<tr>
+<td>Wave (wav)</td>
+<td>57415645</td>
+</tr>
+<tr>
+<td>AVI (avi)</td>
+<td>41564920</td>
+</tr>
+<tr>
+<td>Real Audio (ram)</td>
+<td>2E7261FD</td>
+</tr>
+<tr>
+<td>Real Media (rm)</td>
+<td>2E524D46</td>
+</tr>
+<tr>
+<td>MPEG (mpg)</td>
+<td>000001BA</td>
+</tr>
+<tr>
+<td>MPEG (mpg)</td>
+<td>000001B3</td>
+</tr>
+<tr>
+<td>Quicktime (mov)</td>
+<td>6D6F6F76</td>
+</tr>
+<tr>
+<td>Windows Media (asf)</td>
+<td>3026B2758E66CF11</td>
+</tr>
+</tbody></table>
+<h2 id="2-从winhex中取出的文件头列表"><a href="#2-从winhex中取出的文件头列表" class="headerlink" title="2. 从winhex中取出的文件头列表"></a>2. 从winhex中取出的文件头列表</h2><table>
+<thead>
+<tr>
+<th>文件格式</th>
+<th>文件头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JPEG jpg;jpeg</td>
+<td>0xFFD8FF</td>
+</tr>
+<tr>
+<td>PNG png</td>
+<td>0x89504E470D0A1A0A</td>
+</tr>
+<tr>
+<td>GIF gif</td>
+<td>GIF8</td>
+</tr>
+<tr>
+<td>TIFF tif;tiff</td>
+<td>0x49492A00</td>
+</tr>
+<tr>
+<td>TIFF tif;tiff</td>
+<td>0x4D4D002A</td>
+</tr>
+<tr>
+<td>Bit map bmp</td>
+<td>BM</td>
+</tr>
+<tr>
+<td>AOL ART art</td>
+<td>0x4A47040E00000</td>
+</tr>
+<tr>
+<td>AOL ART art</td>
+<td>0x4A47030E000000</td>
+</tr>
+<tr>
+<td>PC Paintbrush pcx</td>
+<td>0x0A050108</td>
+</tr>
+<tr>
+<td>Graphics Metafile wmf</td>
+<td>0xD7CDC69A</td>
+</tr>
+<tr>
+<td>Graphics Metafile wmf</td>
+<td>0x01000900</td>
+</tr>
+<tr>
+<td>Graphics Metafile wmf</td>
+<td>0x02000900</td>
+</tr>
+<tr>
+<td>Enhanced Metafile emf</td>
+<td>0x0100000058000000</td>
+</tr>
+<tr>
+<td>Corel Draw cdr</td>
+<td>CDR</td>
+</tr>
+<tr>
+<td>CAD dwg</td>
+<td>0x41433130</td>
+</tr>
+<tr>
+<td>Adobe Photoshop psd</td>
+<td>8BPS</td>
+</tr>
+<tr>
+<td>Rich Text Format rtf</td>
+<td>rtf</td>
+</tr>
+<tr>
+<td>XML</td>
+<td>xml</td>
+</tr>
+<tr>
+<td>HTML html;htm;PHP;php3;php4;phtml;</td>
+<td>shtml type</td>
+</tr>
+<tr>
+<td>Email eml</td>
+<td>Delivery-date:</td>
+</tr>
+<tr>
+<td>Outlook Express dbx</td>
+<td>0xCFAD12FE</td>
+</tr>
+<tr>
+<td>MS Office/OLE2doc;xls;dot;ppt;xla;ppa;pps;pot;msi;sdw;db</td>
+<td>0xD0CF11E0A1B11AE1</td>
+</tr>
+<tr>
+<td>MS Access mdb;mda;mde;mdt</td>
+<td>Standard J</td>
+</tr>
+<tr>
+<td>WordPerfect wpd</td>
+<td>0xFF575043</td>
+</tr>
+<tr>
+<td>OpenOffice Writer</td>
+<td>sxw writer</td>
+</tr>
+<tr>
+<td>OpenOffice Calc</td>
+<td>sxc calc</td>
+</tr>
+<tr>
+<td>OpenOffice Math</td>
+<td>sxm math</td>
+</tr>
+<tr>
+<td>OpenOffice Impress</td>
+<td>sxi impress</td>
+</tr>
+<tr>
+<td>OpenOffice Draw</td>
+<td>sxd draw</td>
+</tr>
+<tr>
+<td>Adobe FrameMaker</td>
+<td>fm &lt;MAKERFILE</td>
+</tr>
+<tr>
+<td>PostScript eps.or.ps;ps;eps</td>
+<td>%!PS-Adobe</td>
+</tr>
+<tr>
+<td>Adobe Acrobat pdf</td>
+<td>%PDF-1.</td>
+</tr>
+<tr>
+<td>Quicken qdf</td>
+<td>0xAC9EBD8F</td>
+</tr>
+<tr>
+<td>QuickBooks Backup qbb</td>
+<td>0x458600000600</td>
+</tr>
+<tr>
+<td>Sage sly.or.srt.or.slt;sly;srt;</td>
+<td>slt0x53520100</td>
+</tr>
+<tr>
+<td>Sage Backup 1</td>
+<td>SAGEBACKUP</td>
+</tr>
+<tr>
+<td>Lotus WordPro v9 lwp</td>
+<td>0x576F726450726F</td>
+</tr>
+<tr>
+<td>Lotus 123 v9 123</td>
+<td>0x00001A00051004</td>
+</tr>
+<tr>
+<td>Lotus 123 v5 wk4</td>
+<td>0x00001A0002100400</td>
+</tr>
+<tr>
+<td>Lotus 123 v3 wk3</td>
+<td>0x00001A0000100400</td>
+</tr>
+<tr>
+<td>Lotus 123 v1 wk1</td>
+<td>0x2000604060</td>
+</tr>
+<tr>
+<td>Windows Password pwl</td>
+<td>0xE3828596</td>
+</tr>
+<tr>
+<td>ZIP Archive zip;jar</td>
+<td>0x504B0304</td>
+</tr>
+<tr>
+<td>ZIP Archive (outdated) zip</td>
+<td>0x504B3030</td>
+</tr>
+<tr>
+<td>RAR Archive</td>
+<td>rar Rar!</td>
+</tr>
+<tr>
+<td>GZ Archive gz;tgz</td>
+<td>0x1F8B08</td>
+</tr>
+<tr>
+<td>BZIP Archive bz2</td>
+<td>BZh</td>
+</tr>
+<tr>
+<td>ARJ Archive arj</td>
+<td>0x60EA</td>
+</tr>
+<tr>
+<td>7-ZIP Archive</td>
+<td>7z 7z集’</td>
+</tr>
+<tr>
+<td>Wave wav</td>
+<td>WAVE</td>
+</tr>
+<tr>
+<td>AVI avi</td>
+<td>AVI</td>
+</tr>
+<tr>
+<td>Real Audio ram;ra</td>
+<td>.ra?0</td>
+</tr>
+<tr>
+<td>Real Media rm</td>
+<td>.RMF</td>
+</tr>
+<tr>
+<td>MPEG mpg;mpeg</td>
+<td>0x000001BA</td>
+</tr>
+<tr>
+<td>MPEG mpg;mpeg</td>
+<td>0x000001B3</td>
+</tr>
+<tr>
+<td>Quicktime mov</td>
+<td>moov</td>
+</tr>
+<tr>
+<td>Windows Media asf</td>
+<td>0x3026B2758E66CF11</td>
+</tr>
+<tr>
+<td>MIDI mid</td>
+<td>MThd</td>
+</tr>
+<tr>
+<td>Win32 Executable exe;dll;drv;vxd;sys;ocx;</td>
+<td>vbxMZ</td>
+</tr>
+<tr>
+<td>Win16 Executable exe;dll;drv;vxd;sys;ocx;</td>
+<td>vbxMZ</td>
+</tr>
+<tr>
+<td>ELF Executable elf;</td>
+<td>0x7F454C4601010100</td>
+</tr>
+</tbody></table>
+<h2 id="3-各种文件类型文件头标志位详细列表"><a href="#3-各种文件类型文件头标志位详细列表" class="headerlink" title="3.各种文件类型文件头标志位详细列表"></a>3.各种文件类型文件头标志位详细列表</h2><table>
+<thead>
+<tr>
+<th>文件头</th>
+<th>文件类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FFD8FFFE00</td>
+<td>.JPEG;.JPE;.JPG    JPGGraphic File</td>
+</tr>
+<tr>
+<td>FFD8FFE000</td>
+<td>.JPEG;.JPE;.JPG    JPGGraphic File</td>
+</tr>
+<tr>
+<td>474946383961</td>
+<td>.gif    GIF 89A</td>
+</tr>
+<tr>
+<td>474946383761</td>
+<td>.gif    GIF 87A</td>
+</tr>
+<tr>
+<td>424D</td>
+<td>.bmp    Windows Bitmap</td>
+</tr>
+<tr>
+<td>4D5A</td>
+<td>.exe;.com;.386;.ax;.acm;.sys;.dll;.drv;.flt;.fon;.ocx;.scr;.lrc;.vxd;</td>
+</tr>
+<tr>
+<td>.cpl;.x32</td>
+<td>Executable File</td>
+</tr>
+<tr>
+<td>504B0304</td>
+<td>.zip    Zip Compressed</td>
+</tr>
+<tr>
+<td>3A42617365</td>
+<td>.cnt</td>
+</tr>
+<tr>
+<td>D0CF11E0A1B11AE1</td>
+<td>.doc;.xls;.xlt;.ppt;.apr    MS Compound Document v1 or Lotus Approach APRfile</td>
+</tr>
+<tr>
+<td>0100000058000000</td>
+<td>.emf</td>
+</tr>
+<tr>
+<td>03000000C466C456</td>
+<td>.evt</td>
+</tr>
+<tr>
+<td>3F5F0300</td>
+<td>.gid;.hlp;.lhp    Windows HelpFile</td>
+</tr>
+<tr>
+<td>1F8B08</td>
+<td>.gz    GZ Compressed File</td>
+</tr>
+<tr>
+<td>28546869732066696C65</td>
+<td>.hqx</td>
+</tr>
+<tr>
+<td>0000010000</td>
+<td>.ico    Icon File</td>
+</tr>
+<tr>
+<td>4C000000011402</td>
+<td>.lnk    Windows LinkFile</td>
+</tr>
+<tr>
+<td>25504446</td>
+<td>.pdf    Adobe PDF File</td>
+</tr>
+<tr>
+<td>5245474544495434</td>
+<td>.reg</td>
+</tr>
+<tr>
+<td>7B5C727466</td>
+<td>.rtf    Rich Text Format File</td>
+</tr>
+<tr>
+<td>lh</td>
+<td>.lzh    Lz compression file</td>
+</tr>
+<tr>
+<td>MThd</td>
+<td>.mid</td>
+</tr>
+<tr>
+<td>0A050108</td>
+<td>.pcx</td>
+</tr>
+<tr>
+<td>25215053</td>
+<td>.eps    Adobe EPS File</td>
+</tr>
+<tr>
+<td>2112</td>
+<td>.ain    AIN Archive File</td>
+</tr>
+<tr>
+<td>1A02</td>
+<td>.arc    ARC/PKPAK Compressed 1</td>
+</tr>
+<tr>
+<td>1A03</td>
+<td>.arc    ARC/PKPAK Compressed 2</td>
+</tr>
+<tr>
+<td>1A04</td>
+<td>.arc    ARC/PKPAK Compressed 3</td>
+</tr>
+<tr>
+<td>1A08</td>
+<td>.arc    ARC/PKPAK Compressed 4</td>
+</tr>
+<tr>
+<td>1A09</td>
+<td>.arc    ARC/PKPAK Compressed 5</td>
+</tr>
+<tr>
+<td>60EA</td>
+<td>.arj    ARJ Compressed</td>
+</tr>
+<tr>
+<td>41564920</td>
+<td>.avi    Audio Video Interleave(AVI)</td>
+</tr>
+<tr>
+<td>425A68</td>
+<td>.bz;.bz2    Bzip Archive</td>
+</tr>
+<tr>
+<td>49536328</td>
+<td>.cab    Cabinet File</td>
+</tr>
+<tr>
+<td>4C01</td>
+<td>.obj    Compiled Object Module</td>
+</tr>
+<tr>
+<td>303730373037</td>
+<td>.tar;.cpio    CPIO ArchiveFile</td>
+</tr>
+<tr>
+<td>4352555348</td>
+<td>.cru;.crush    CRUSH ArchiveFile</td>
+</tr>
+<tr>
+<td>3ADE68B1</td>
+<td>.dcx    DCX Graphic File</td>
+</tr>
+<tr>
+<td>1F8B</td>
+<td>.gz;.tar;.tgz    Gzip ArchiveFile</td>
+</tr>
+<tr>
+<td>91334846</td>
+<td>.hap    HAP Archive File</td>
+</tr>
+<tr>
+<td>3C68746D6C3E</td>
+<td>.htm;.html    HyperText Markup Language 1</td>
+</tr>
+<tr>
+<td>3C48544D4C3E</td>
+<td>.htm;.html    HyperText Markup Language 2</td>
+</tr>
+<tr>
+<td>3C21444F4354</td>
+<td>.htm;.html    HyperText MarkupLanguage 3</td>
+</tr>
+<tr>
+<td>100</td>
+<td>.ico    ICON File</td>
+</tr>
+<tr>
+<td>5F27A889</td>
+<td>.jar    JAR Archive File</td>
+</tr>
+<tr>
+<td>2D6C68352D</td>
+<td>.lha    LHA Compressed</td>
+</tr>
+<tr>
+<td>20006040600</td>
+<td>.wk1;.wks    Lotus 123 v1 Worksheet</td>
+</tr>
+<tr>
+<td>00001A0007800100</td>
+<td>.fm3    Lotus 123 v3 FMTfile</td>
+</tr>
+<tr>
+<td>00001A0000100400</td>
+<td>.wk3    Lotus 123 v3Worksheet</td>
+</tr>
+<tr>
+<td>20006800200</td>
+<td>.fmt    Lotus 123 v4 FMTfile</td>
+</tr>
+<tr>
+<td>00001A0002100400</td>
+<td>.wk4    Lotus 123 v5</td>
+</tr>
+<tr>
+<td>5B7665725D</td>
+<td>.ami    Lotus Ami Pro</td>
+</tr>
+<tr>
+<td>300000041505052</td>
+<td>.adx    Lotus ApproachADX file</td>
+</tr>
+<tr>
+<td>1A0000030000</td>
+<td>.nsf;.ntf    Lotus NotesDatabase/Template</td>
+</tr>
+<tr>
+<td>4D47582069747064</td>
+<td>.ds4    MicrografixDesigner 4</td>
+</tr>
+<tr>
+<td>4D534346</td>
+<td>.cab    Microsoft CAB FileFormat</td>
+</tr>
+<tr>
+<td>4D546864</td>
+<td>.mid    Midi Audio File</td>
+</tr>
+<tr>
+<td>000001B3</td>
+<td>.mpg;.mpeg    MPEG Movie</td>
+</tr>
+<tr>
+<td>0902060000001000B9045C00</td>
+<td>.xls    MS Excel v2</td>
+</tr>
+<tr>
+<td>0904060000001000F6055C00</td>
+<td>.xls    MS Excel v4</td>
+</tr>
+<tr>
+<td>7FFE340A</td>
+<td>.doc    MS Word</td>
+</tr>
+<tr>
+<td>1234567890FF</td>
+<td>.doc    MS Word 6.0</td>
+</tr>
+<tr>
+<td>31BE000000AB0000</td>
+<td>.doc    MS Word forDOS 6.0</td>
+</tr>
+<tr>
+<td>1A00000300001100</td>
+<td>.nsf    NotesDatabase</td>
+</tr>
+<tr>
+<td>7E424B00</td>
+<td>.psp    PaintShop Pro Image File</td>
+</tr>
+<tr>
+<td>504B0304</td>
+<td>.zip    PKZIP Compressed</td>
+</tr>
+<tr>
+<td>89504E470D0A</td>
+<td>.png    PNG Image File</td>
+</tr>
+<tr>
+<td>6D646174</td>
+<td>.mov    QuickTime Movie</td>
+</tr>
+<tr>
+<td>6D646174</td>
+<td>.qt    Quicktime MovieFile</td>
+</tr>
+<tr>
+<td>52617221</td>
+<td>.rar    RAR Archive File</td>
+</tr>
+<tr>
+<td>2E7261FD</td>
+<td>.ra;.ram    Real AudioFile</td>
+</tr>
+<tr>
+<td>EDABEEDB</td>
+<td>.rpm    RPM Archive File</td>
+</tr>
+<tr>
+<td>2E736E64</td>
+<td>.au    SoundMachine AudioFile</td>
+</tr>
+<tr>
+<td>53495421</td>
+<td>.sit    Stuffit v1 ArchiveFile</td>
+</tr>
+<tr>
+<td>53747566664974</td>
+<td>.sit    Stuffit v5Archive File</td>
+</tr>
+<tr>
+<td>1F9D</td>
+<td>.z    TAR Compressed ArchiveFile</td>
+</tr>
+<tr>
+<td>49492A</td>
+<td>.tif;.tiff    TIFF (Intel)</td>
+</tr>
+<tr>
+<td>4D4D2A</td>
+<td>.tif;.tiff    TIFF (Motorola)</td>
+</tr>
+<tr>
+<td>554641</td>
+<td>.ufa    UFA Archive File</td>
+</tr>
+<tr>
+<td>57415645666D74</td>
+<td>.wav    Wave Files</td>
+</tr>
+<tr>
+<td>D7CDC69A</td>
+<td>.wmf    Windows Meta File</td>
+</tr>
+<tr>
+<td>4C000000</td>
+<td>.lnk    Windows Shortcut (LinkFile)</td>
+</tr>
+<tr>
+<td>504B3030504B0304</td>
+<td>.zip    WINZIPCompressed</td>
+</tr>
+<tr>
+<td>FF575047</td>
+<td>.wpg    WordPerfectGraphics</td>
+</tr>
+<tr>
+<td>FF575043</td>
+<td>.wp    WordPerfect v5 orv6</td>
+</tr>
+<tr>
+<td>3C3F786D6C</td>
+<td>.xml    XML Document</td>
+</tr>
+<tr>
+<td>FFFE3C0052004F004F0054005300540055004200</td>
+<td>.xml    XML Document(ROOTSTUB)</td>
+</tr>
+<tr>
+<td>3C21454E54495459</td>
+<td>.dtd    XML DTD</td>
+</tr>
+<tr>
+<td>5A4F4F20</td>
+<td>.zoo    ZOO Archive File</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>LiuKairui
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://liukairui.cc/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/" title="常见的文件头格式">http://liukairui.cc/常见的文件头格式/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%96%87%E4%BB%B6%E5%A4%B4/" rel="tag"><i class="fa fa-tag"></i> 文件头</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A56%E9%A2%98%E8%A7%A3/" rel="prev" title="2020牛客寒假算法基础集训营6题解">
+                  <i class="fa fa-chevron-left"></i> 2020牛客寒假算法基础集训营6题解
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E8%A7%A3%E5%86%B3vimaleclang%E6%89%BE%E4%B8%8D%E5%88%B0iostream/" rel="next" title="解决vim ale clang找不到iostream">
+                  解决vim ale clang找不到iostream <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">晋 ICP 备 19015041 号 - 2 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuKairui</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><script
+  async
+  src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+
+ 
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-precise-range-plugin@1.3.0/moment-precise-range.min.js"></script>
+<script>
+  function timer() {
+    var ages = moment.preciseDiff(moment(),moment(20201101,"YYYYMMDD"));
+    ages = ages.replace(/years?/, "年");
+    ages = ages.replace(/months?/, "月");
+    ages = ages.replace(/days?/, "天");
+    ages = ages.replace(/hours?/, "小时");
+    ages = ages.replace(/minutes?/, "分");
+    ages = ages.replace(/seconds?/, "秒");
+    ages = ages.replace(/\d+/g, '<span class="daysCnt" style="color:#1890ff">$&</span>');
+    div.innerHTML = `我已在此等候你 ${ages}`;
+    div.className="workDays";
+  }
+  var div = document.createElement("div");
+  //插入到copyright之后
+  var copyright = document.querySelector(".copyright");
+  document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+  timer();
+  setInterval("timer()",1000)
+</script>
+
+
+ 
+<script>
+  var beian=document.querySelector("body > footer > div > div.beian > a");
+  var cpr=document.querySelector("body > footer > div > div.copyright");
+  cpr.appendChild(beian);
+  document.querySelector("#busuanzi_container_site_uv > span.post-meta-item-icon").remove();
+  document.querySelector("#busuanzi_container_site_pv > span.post-meta-item-icon").remove();
+  var cnz=document.querySelector(".workDays");//.parentNode;
+  var bsz=document.querySelector(".busuanzi-count");
+  if(cnz!=null&&bsz!=null){
+    cnz.parentNode.insertBefore(bsz,cnz);
+    //console.log("***",cnz.parentNode.insertBefore(bsz,cnz));
+  }
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.2/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+
+  <script>
+    NProgress.configure({
+      showSpinner: true
+    });
+    NProgress.start();
+    document.addEventListener('readystatechange', () => {
+      if (document.readyState === 'interactive') {
+        NProgress.inc(0.8);
+      }
+      if (document.readyState === 'complete') {
+        NProgress.done();
+      }
+    });
+    document.addEventListener('pjax:send', () => {
+      NProgress.start();
+    });
+    document.addEventListener('pjax:success', () => {
+      NProgress.done();
+    });
+  </script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <div style="display: none;">
+    <script data-pjax src="//s95.cnzz.com/z_stat.php?id=1279392499&web_id=1279392499"></script>
+  </div>
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({"enable":true,"appId":"ABKlVtS4cyaWYEwunPyK3sXt-9Nh9j0Va","appKey":"xxGXdTTEGEVifs2TLB35844I","serverURLs":"https://abklvts4.lc-cn-e1-shared.com","placeholder":"请开始你的表演","avatar":"identicon","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[]}, {
+      el: '#valine-comments',
+      path: "/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A0%BC%E5%BC%8F/",
+      serverURLs: "https://abklvts4.lc-cn-e1-shared.com"
+    }));
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  <script async src="/js/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+  <script src="https://liukairuicc-1256424792.cos.ap-nanjing.myqcloud.com/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效 记得同步到header.njk
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('body>main>header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        //
+        //  $('body>main>header>aside').wobbleWindow({
+        //    radius: 50,
+        //    movementLeft: false,
+        //    movementTop: false,
+        //    movementBottom: false,
+        //    position: 'fixed',
+        //    debug: false,
+        //  });
+        //
+
+        
+          $('body>footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

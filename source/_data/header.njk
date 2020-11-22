@@ -1,0 +1,41 @@
+{# wobble窗口摆动特效 #}
+{% if theme.wobble %}
+  <script>
+    //只在桌面版网页启用特效 记得同步到body-end.njk
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        {% if theme.wobble.header %}
+          $('body>main>header').wobbleWindow({
+            radius: {{ theme.wobble.radius }},
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        {% endif %}
+
+        //{% if theme.wobble.sidebar %}
+        //  $('body>main>header>aside').wobbleWindow({
+        //    radius: {{ theme.wobble.radius }},
+        //    movementLeft: false,
+        //    movementTop: false,
+        //    movementBottom: false,
+        //    position: 'fixed',
+        //    debug: false,
+        //  });
+        //{% endif %}
+
+        {% if theme.wobble.footer %}
+          $('body>footer').wobbleWindow({
+            radius: {{ theme.wobble.radius }},
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        {% endif %}
+      });
+    }
+
+  </script>
+{% endif %}

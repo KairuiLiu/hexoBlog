@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+  <script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"liukairui.cc","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="记录了我Visual Studio Code的使用与配置经历，前前后后差不多用了一年，对于常用的C++,Python,LaTeX,R语言写的较为详细可行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vscode使用全指南(环境配置,插件推荐,美化)(C++,Python,LaTeX,R...)">
+<meta property="og:url" content="http://liukairui.cc/vscode%E4%BD%BF%E7%94%A8%E5%85%A8%E6%8C%87%E5%8D%97(%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90,%E7%BE%8E%E5%8C%96)(C++,Python,LaTeX,R...)/index.html">
+<meta property="og:site_name" content="LiuKairui Blog">
+<meta property="og:description" content="记录了我Visual Studio Code的使用与配置经历，前前后后差不多用了一年，对于常用的C++,Python,LaTeX,R语言写的较为详细可行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020030200150826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200301234640717.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200301234950575.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200301235015699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200301235512748.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200301235842853.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302002944621.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302004632766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302082811105.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302083612869.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302083550139.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302085817998.png">
+<meta property="og:image" content="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2/raw/master/images/forceUniqueOpeningColorDisabled.png">
+<meta property="og:image" content="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2/raw/master/images/forceUniqueOpeningColorEnabled.png">
+<meta property="og:image" content="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2/raw/master/images/forceIterationColorCycleEnabled.png">
+<meta property="og:image" content="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2/raw/master/images/consecutiveExample.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/octref/polacode/master/demo/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/oderwat/vscode-indent-rainbow/master/assets/example.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302101238624.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302094107398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302095050548.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020030210145071.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200302101553693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://user-images.githubusercontent.com/9987486/40583705-7105dda8-61c6-11e8-935a-3c5d475a1eb1.gif">
+<meta property="og:image" content="https://user-images.githubusercontent.com/9987486/40583926-b1fb5398-61ca-11e8-8271-4ac650d158d3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200318002051881.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200318002107831.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200318002129312.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200318002145270.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200318002159268.png">
+<meta property="article:published_time" content="2020-10-30T16:00:01.000Z">
+<meta property="article:modified_time" content="2020-11-15T18:10:38.021Z">
+<meta property="article:author" content="LiuKairui">
+<meta property="article:tag" content="工具">
+<meta property="article:tag" content="IDE">
+<meta property="article:tag" content="杂七杂八">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020030200150826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70">
+
+
+<link rel="canonical" href="http://liukairui.cc/vscode%E4%BD%BF%E7%94%A8%E5%85%A8%E6%8C%87%E5%8D%97(%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90,%E7%BE%8E%E5%8C%96)(C++,Python,LaTeX,R...)/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script> 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "谢谢离开" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "欢迎归来" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+<script>
+
+    var endlineInterval=setInterval(function(){
+      if(!document.querySelector(".liukairuipostendline")){
+        $("body > main > div.main-inner.post.posts-expand > div.post-block.animated.fadeIn > article > div.popular-posts-header").prepend('<div class="liukairuipostendline" style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-coffee"></i>感谢您的阅读-------------</div>');
+      }
+    },2000);
+
+</script>
+
+  <title>vscode使用全指南(环境配置,插件推荐,美化)(C++,Python,LaTeX,R...) | LiuKairui Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="LiuKairui Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">LiuKairui Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-杂">
+
+    <a href="/miscellaneous/" rel="section"><i class="fa fa-ghost fa-fw"></i>杂</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/messageBoard/" rel="section"><i class="fab fa-facebook-messenger fa-fw"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+  <script>
+    //只在桌面版网页启用特效 记得同步到body-end.njk
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('body>main>header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        //
+        //  $('body>main>header>aside').wobbleWindow({
+        //    radius: 50,
+        //    movementLeft: false,
+        //    movementTop: false,
+        //    movementBottom: false,
+        //    position: 'fixed',
+        //    debug: false,
+        //  });
+        //
+
+        
+          $('body>footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+      });
+    }
+
+  </script>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">1.安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9F%BA%E7%A1%80%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.基础的用法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9%E5%8D%B3%E4%BD%BF%E4%BD%A0%E4%B8%8D%E7%94%A8%E8%BF%99%E4%B8%AA%E8%AF%AD%E8%A8%80%E4%B9%9F%E8%A6%81%E8%B7%B3%E8%BF%87%E4%B9%8B%E5%90%8E%E5%BE%80%E5%90%8E%E7%9C%8B%E5%AE%8C%EF%BC%81"><span class="nav-number"></span> <span class="nav-text">以下内容即使你不用这个语言也要跳过之后往后看完！</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-C-%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">C&#x2F;C++ 配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%88%BD"><span class="nav-number"></span> <span class="nav-text">爽</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">Python配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LaTeX-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">$\LaTeX$配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-amp-css-amp-Js"><span class="nav-number">3.</span> <span class="nav-text">HTML&amp;css&amp;Js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R%E8%AF%AD%E8%A8%80"><span class="nav-number">4.</span> <span class="nav-text">R语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git"><span class="nav-number">5.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99"><span class="nav-number">6.</span> <span class="nav-text">正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">开发实用插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coderunner%E7%94%A8%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">coderunner用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%AE%AE%E5%BC%80%E5%90%AF%EF%BC%9A%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98"><span class="nav-number">9.</span> <span class="nav-text">建议开启：自动保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96%E6%8F%92%E4%BB%B6"><span class="nav-number">10.</span> <span class="nav-text">美化插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%EF%BC%9A%E6%88%91%E7%9A%84setting-json%E6%96%87%E4%BB%B6"><span class="nav-number">11.</span> <span class="nav-text">附：我的setting.json文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%EF%BC%9A%E7%9B%AE%E5%89%8D%E5%9C%A8%E7%94%A8%E7%9A%84%E6%89%A9%E5%B1%95"><span class="nav-number">12.</span> <span class="nav-text">附：目前在用的扩展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1"><span class="nav-number"></span> <span class="nav-text">完结撒花</span></a></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiuKairui"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">LiuKairui</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KairuiLiu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KairuiLiu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tclkr@live.com" title="E-Mail → mailto:tclkr@live.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=oaf3ToOlN17hr5sHV98bT8qxsNYGaw5L&noverify=0" title="QQ → https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;oaf3ToOlN17hr5sHV98bT8qxsNYGaw5L&amp;noverify&#x3D;0" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://liukairui.blog.csdn.net/" title="CSDN → https:&#x2F;&#x2F;liukairui.blog.csdn.net" rel="noopener" target="_blank"><i class="fab fa-cuttlefish fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://liukairui.me/" title="Another Site → http:&#x2F;&#x2F;liukairui.me" rel="noopener" target="_blank"><i class="fa fa-globe fa-fw"></i>Another Site</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://paste.ubuntu.com/" title="https:&#x2F;&#x2F;paste.ubuntu.com&#x2F;" rel="noopener" target="_blank">Ubuntu Pastebin</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://send.firefox.com/" title="https:&#x2F;&#x2F;send.firefox.com&#x2F;" rel="noopener" target="_blank">Firefox Send</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.godder.top/" title="https:&#x2F;&#x2F;blog.godder.top&#x2F;" rel="noopener" target="_blank">朽木自雕</a>
+        </li>
+    </ul>
+  </div>
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7JavaScript%E8%BF%9B%E9%98%B6%E7%89%88%E7%AC%94%E8%AE%B0/" title="尚硅谷 JavaScript 进阶版笔记" target="_blank">尚硅谷 JavaScript 进阶版笔记</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7JavaScript%E5%9F%BA%E7%A1%80%E7%89%88%E7%AC%94%E8%AE%B0/" title="尚硅谷 JavaScript 基础版笔记" target="_blank">尚硅谷 JavaScript 基础版笔记</a>
+          </li>
+        
+          <li>
+            <a href="/C%E8%AF%AD%E8%A8%80switch%E7%9A%84%E8%8C%83%E5%9B%B4%E5%88%A4%E6%96%AD%E8%A1%A8%E8%BE%BE%E6%B3%95/" title="C语言switch的范围判断表达法" target="_blank">C语言switch的范围判断表达法</a>
+          </li>
+        
+          <li>
+            <a href="/Html5%E7%9A%84%E9%9F%B3%E8%A7%86%E9%A2%91%E6%A0%87%E7%AD%BE%E4%B8%8E%E6%96%B0%E5%A2%9E%E5%86%B7%E9%97%A8%E6%A0%87%E7%AD%BE/" title="Html5的音视频标签与新增冷门标签" target="_blank">Html5的音视频标签与新增冷门标签</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7Canvas%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="尚硅谷Canvas学习笔记" target="_blank">尚硅谷Canvas学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://liukairui.cc/vscode%E4%BD%BF%E7%94%A8%E5%85%A8%E6%8C%87%E5%8D%97(%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90,%E7%BE%8E%E5%8C%96)(C++,Python,LaTeX,R...)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="LiuKairui">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LiuKairui Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vscode使用全指南(环境配置,插件推荐,美化)(C++,Python,LaTeX,R...)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-31 00:00:01" itemprop="dateCreated datePublished" datetime="2020-10-31T00:00:01+08:00">2020-10-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-16 02:10:38" itemprop="dateModified" datetime="2020-11-16T02:10:38+08:00">2020-11-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/IDE/vscode/" itemprop="url" rel="index"><span itemprop="name">vscode</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/IDE/vscode/" itemprop="url" rel="index"><span itemprop="name">vscode</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/vscode%E4%BD%BF%E7%94%A8%E5%85%A8%E6%8C%87%E5%8D%97(%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90,%E7%BE%8E%E5%8C%96)(C++,Python,LaTeX,R...)/" class="post-meta-item leancloud_visitors" data-flag-title="vscode使用全指南(环境配置,插件推荐,美化)(C++,Python,LaTeX,R...)" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/vscode%E4%BD%BF%E7%94%A8%E5%85%A8%E6%8C%87%E5%8D%97(%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90,%E7%BE%8E%E5%8C%96)(C++,Python,LaTeX,R...)/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/vscode%E4%BD%BF%E7%94%A8%E5%85%A8%E6%8C%87%E5%8D%97(%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90,%E7%BE%8E%E5%8C%96)(C++,Python,LaTeX,R...)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>19k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>17 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">记录了我Visual Studio Code的使用与配置经历，前前后后差不多用了一年，对于常用的C++,Python,LaTeX,R语言写的较为详细可行</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>简介那堆废话就不说了，直接开始！</p>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>打开<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">官网</a>直接下载(推荐测试版insider)，<br>安装时让有一个界面有好几个打钩的，全打上，一路下一步<br><img data-src="https://img-blog.csdnimg.cn/2020030200150826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>wow，好用的插件全在图里</p>
+<h2 id="2-基础的用法"><a href="#2-基础的用法" class="headerlink" title="2.基础的用法"></a>2.基础的用法</h2><ul>
+<li>第一次打开以后发现这玩意居然是英文的，莫慌，看到左侧有一个这样的工具栏</li>
+<li><img data-src="https://img-blog.csdnimg.cn/20200301234640717.png" alt="在这里插入图片描述"><br>第一个是资源管理器，第二个是git，第三个是调试，第四个是扩展市场<br>选择第四个，输入chinese，选择第一个插件，点击install(安装)重启即可使用<br><img data-src="https://img-blog.csdnimg.cn/20200301234950575.png" alt="在这里插入图片描述"><br><img data-src="https://img-blog.csdnimg.cn/20200301235015699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<p> <strong>至此你掌握了插件(扩展)的安装方法</strong></p>
+<ul>
+<li>Vscode作为一款现代编辑器，不可以直接运行文件，需要有一个工作文件夹，所以请在使用时选择 <code>文件-&gt;选择文件夹</code>，其实直接把文件夹拖动到vscode的图标上即可qwq</li>
+<li>新建文件：打开资源管理，就是左边那个栏第一个<code>(Ctrl+B)</code>，右键-&gt;新建-&gt;test.cpp-&gt;写代码-&gt; **没高亮?**一般是有的，没有选右下角这里，选择cpp，(其他语言同理)<br><img data-src="https://img-blog.csdnimg.cn/20200301235512748.png" alt="在这里插入图片描述"><ul>
+<li>快捷键配置<br>键盘快捷键的设置也在左下角的设置按钮里。打开之后可以看到上图的界面。<br>默认的快捷键非常方便，我没有修改快捷键。<br>这里给出几组最常用的快捷键，可以大幅度提高效率（灵活使用甚至可以丢掉鼠标写代码）：<br><img data-src="https://img-blog.csdnimg.cn/20200301235842853.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li><strong>编辑器与窗口管理</strong><br>打开 Ctrl+O<br>新窗口 Ctrl+Shift+N<br>新标签页 Ctrl+N<br>关闭整个VSC窗口 Ctrl+Shift+W<br>关闭当前标签页 Ctrl+W<br>重新打开刚刚关闭的标签页 Ctrl+Shift+T<br>切换标签页 Ctrl+Tab<br>创建一个新编辑器并将当前页面复制过去 Ctrl+<br>在前三个编辑器之间切换 Ctrl+1 2 3<br>将焦点编辑器移动位置 先按下 Ctrl+K 左下角出现提示后用 ← → 移动 或者可以 Ctrl+Alt+←→<br>在标签页之间切换 Alt+1~9</li>
+<li><strong>代码编辑</strong><br>搜索 Ctrl+F<br>替换 Ctrl+H<br>复制光标所在行 只需按下Ctrl+C即可。<br>去掉行尾空格 Ctrl+K 然后 Ctrl+X<br>切换行注释(可多行) Ctrl+/<br>代码缩进 Ctrl+[ 或 Ctrl+]<br>当前行上下移动 Alt+↑↓<br>当前行后插入一行 Ctrl+Enter<br>当前行前插入一行 Ctrl+Shift+Enter<br>选中下一行 Ctrl+i</li>
+</ul>
+<strong>(神级辅助键) 撤销光标上次移动 Ctrl+U</strong><br>选中下个高亮的匹配项 Ctrl+D<br><strong>多光标模式 Atl+鼠标单击即可在单击处创建新的光标<br>(这个模式非常灵活，可以搭配多种操作提高效率)<br>(神级辅助键) 速览定义 Alt+F12</strong><br>转到定义 F12<br>Zen模式(一个奇怪的类似全屏的模式) Ctrl+K 然后 Z<br><strong>打开自动保存 Ctrl+Shift+P之后输入AutoSave，选中，按下回车。<br>打开终端 Ctrl+~</strong><ul>
+<li>鼠标中键<br>按住鼠标中键并选择=Alt+Shift选择 （既选择矩形区域）<br>用鼠标中键关闭编辑器/选项卡/通知：在空编辑器/选项卡/通知条任意位置按下中键即可</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="以下内容即使你不用这个语言也要跳过之后往后看完！"><a href="#以下内容即使你不用这个语言也要跳过之后往后看完！" class="headerlink" title="以下内容即使你不用这个语言也要跳过之后往后看完！"></a>以下内容即使你不用这个语言也要跳过之后往后看完！</h1><hr>
+<h2 id="C-C-配置"><a href="#C-C-配置" class="headerlink" title="C/C++ 配置"></a>C/C++ 配置</h2><ol>
+<li>你需要安装g++/gcc环境并按好环境变量，这部分自己搜索</li>
+<li>搜索安装vscode扩展中的<br><code>C/C++</code>插件(必装)<br><code>Better C++ Syntax</code> 选装<br><code>coderunner插件</code>这个可以帮你一键运行插件而不需要配置调试文件，但是第一次使用需要配置下，见下<br><code>C++ Intellisense</code> 代码提示与高亮</li>
+</ol>
+<p><strong>安装最后面写的通用良心推荐插件</strong><br>3. 运行你的代码(不使用vscode的运行方法，直接在终端运行，不能调试)：<br>coderunner 直接运行<br>5. 运行你的代码(vscode环境下的可以调试)<br>按下<code>F5</code>可以开始调试代码，<code>Shift+F5</code>可以直接不调试直接运行<br>emm，当然不能运行hahaha<br>你需要告诉vscode咋运行啊<br>vscode傻吗，他不认识这是这是C++文件吗？？<br>为了高度自定义吧qwq…<br>我们需要手动在工作目录下创建一个文件夹包含配置文件如下<br><img data-src="https://img-blog.csdnimg.cn/20200302002944621.png" alt="在这里插入图片描述"><br>以<code>英文点开头的是什么文件</code>？<br>在Linux下是隐藏文件，所以不建议你在windows资源管理器直接创建，建议直接在vscode中创建<br>文件创建必须一摸一样创建下来，然后把一下内容复制下来<br><strong>launch.json</strong><br>其中这一行需要修改为你的gcc路径<code> &quot;miDebuggerPath&quot;: &quot;C:/mingw64/bin/gdb.exe&quot;,</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;C&#x2F;C++&quot;,</span><br><span class="line">            &quot;type&quot;: &quot;cppdbg&quot;,</span><br><span class="line">            &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">            &quot;program&quot;: &quot;$&#123;fileDirname&#125;&#x2F;$&#123;fileBasenameNoExtension&#125;.exe&quot;,</span><br><span class="line">            &quot;args&quot;: [],</span><br><span class="line">            &quot;stopAtEntry&quot;: false,</span><br><span class="line">            &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,</span><br><span class="line">            &quot;environment&quot;: [],</span><br><span class="line">            &quot;externalConsole&quot;: true,</span><br><span class="line">            &quot;MIMode&quot;: &quot;gdb&quot;,</span><br><span class="line">            &quot;miDebuggerPath&quot;: &quot;C:&#x2F;mingw64&#x2F;bin&#x2F;gdb.exe&quot;,</span><br><span class="line">            &quot;preLaunchTask&quot;: &quot;g++&quot;,</span><br><span class="line">            &quot;setupCommands&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,</span><br><span class="line">                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,</span><br><span class="line">                    &quot;ignoreFailures&quot;: true</span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>tasks.json</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;version&quot;: &quot;2.0.0&quot;,</span><br><span class="line">    &quot;command&quot;: &quot;g++&quot;,</span><br><span class="line">    &quot;args&quot;: [</span><br><span class="line">        &quot;-g&quot;,</span><br><span class="line">        &quot;$&#123;file&#125;&quot;,</span><br><span class="line">        &quot;-o&quot;,</span><br><span class="line">        &quot;$&#123;fileDirname&#125;&#x2F;$&#123;fileBasenameNoExtension&#125;.exe&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;problemMatcher&quot;: &#123;</span><br><span class="line">        &quot;owner&quot;: &quot;cpp&quot;,</span><br><span class="line">        &quot;fileLocation&quot;: [</span><br><span class="line">            &quot;relative&quot;,</span><br><span class="line">            &quot;$&#123;workspaceRoot&#125;&quot;</span><br><span class="line">        ],</span><br><span class="line">        &quot;pattern&quot;: &#123;</span><br><span class="line">            &quot;regexp&quot;: &quot;^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$&quot;,</span><br><span class="line">            &quot;file&quot;: 1,</span><br><span class="line">            &quot;line&quot;: 2,</span><br><span class="line">            &quot;column&quot;: 3,</span><br><span class="line">            &quot;severity&quot;: 4,</span><br><span class="line">            &quot;message&quot;: 5</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;group&quot;: &#123;</span><br><span class="line">        &quot;kind&quot;: &quot;build&quot;,</span><br><span class="line">        &quot;isDefault&quot;: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>于是你就可以愉快的设置断点，监视愉快的编程了<br><strong>每次都要配置这些，太麻烦了!!!</strong><br>我的解决方法是在C盘根目录下新建文件夹，名字随意(最好首字母和其他文件夹不一样)，然后把你配置好的tasks和launch文件放在里面，每次新建一个工作文件夹的时候在终端这么写<br><img data-src="https://img-blog.csdnimg.cn/20200302004632766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我是在C下新建vscodejson文件夹放json配置文件，使用时，输入<code>C:\vscodejson\</code>只需要输入<code>\v</code>+Tab就可以自动补全了，大写的</p>
+<h1 id="爽"><a href="#爽" class="headerlink" title="爽"></a>爽</h1><hr>
+<h2 id="Python配置"><a href="#Python配置" class="headerlink" title="Python配置"></a>Python配置</h2><ol>
+<li>你需要安装Python环境并按好环境变量，这部分自己搜索</li>
+<li>安装vscode的扩展<ol>
+<li><code>Python</code> 扩展(必装)</li>
+<li><code>Anaconda Extension Pack</code> (用Anaconda装)</li>
+<li><code>Python Extended</code> 选装</li>
+<li><code>Python Extension Pack</code> 选装</li>
+<li><code>Python for VSCode</code> 选装</li>
+<li><code>coderunner插件</code>这个可以帮你一键运行插件而不需要配置调试文件，插件配置见下</li>
+<li><code>MagicPython</code></li>
+</ol>
+</li>
+<li>愉快的运行(使用coderunner直接运行)</li>
+<li><code>F5</code>/<code>Shift+F5</code>运行+调试，与c++不同的是.vscode文件夹可以自动生成</li>
+</ol>
+<hr>
+<h2 id="LaTeX-配置"><a href="#LaTeX-配置" class="headerlink" title="$\LaTeX$配置"></a>$\LaTeX$配置</h2><ol>
+<li><p>你需要安装$\TeX$环境并按好环境变量，这部分自己搜索</p>
+</li>
+<li><p>安装vscode的扩展</p>
+<ol>
+<li><code>LaTeX language support</code> 扩展(必装)</li>
+<li><code>LaTeX Preview</code></li>
+<li><code>LaTeX Workshop</code> </li>
+<li><code>latex-formatter</code> 选装</li>
+</ol>
+</li>
+<li><p>完事</p>
+</li>
+</ol>
+<p>当你新建一个 $.\TeX$文件之后，就会发现，一旦你打开这个文件，左栏就会出现一个$\TeX$图标，愉快的写一写之后，单击左栏的 $\TeX$,单击<br>build LaTeX Project然后展开View LaTeX PDF，选择View in VSCode Tab即可<br><img data-src="https://img-blog.csdnimg.cn/20200302082811105.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>第一个命令会帮助我们编译，然后第二个会帮助我们打开PDF，但是，每次修改都要这么一点着实麻烦<br>首先，View in Vscode 可以不点，应为编译出新PDF之后vscode会自动刷新，所以我们每次只需要执行<br>然后是build LaTeX Project，我们发现他是有快捷键的，我一般是用coderunner运行文件的，运行时<code>Ctrl+Alt+N</code>但是coderunner无法运行Tex(可以修改配置文件运行，我们先不讨论)，所以我们可以设置快捷键，实现在Tex文件下,按<code>Ctrl+Alt+N</code>执行build LaTeX Project，这里我们这样写<br>首先按’按键录制’，按原快捷键的组合，然后右键，更改键绑定，按压<code>Ctrl+Alt+N</code>，对于冲突选择’是’,然后同样按键录制，<code>Ctrl+Alt+N</code>修改如下</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200302083612869.png" alt="在这里插入图片描述"><br>原coderunner的为<br><img data-src="https://img-blog.csdnimg.cn/20200302083550139.png" alt="在这里插入图片描述"><br>修改’当’内的内容请右键条目，选择修改when表达式<br>coderunner输入为<code>-</code><br>LaTeX… 输入为<code>!config.latex-workshop.bind.altKeymap.enabled &amp;&amp; editorLangId == &#39;latex&#39;</code><br>完成，至此，每次只需按<code>Ctrl+Alt+N</code>即可编译，然后点一次View in Vscode 以后每次刷新只需按<code>ctrl+Alt+N</code>，如果不信请ctrl+s保存或者用最后的方法自动保存</p>
+<p><strong>UpDate: 这个模块还有很多要调教的地方</strong></p>
+<ol>
+<li>默认编译器</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;latex-preview.command&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>取消保存后自动编译</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;latex-workshop.latex.autoBuild.run&quot;</span>: <span class="string">&quot;never&quot;</span>,</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>出现<code>Error Page XXX on XXX not</code>应添加</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;latex-workshop.latex.recipes&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">        <span class="string">&quot;tools&quot;</span>: [</span><br><span class="line">          <span class="string">&quot;xelatex&quot;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;xelatex -&gt; bibtex -&gt; xelatex*2&quot;</span>,</span><br><span class="line">        <span class="string">&quot;tools&quot;</span>: [</span><br><span class="line">          <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">          <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">          <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">          <span class="string">&quot;xelatex&quot;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>我也忘了当时为什么要写的配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;latex-workshop.latex.tools&quot;</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;latexmk&quot;</span>,</span><br><span class="line">    <span class="string">&quot;command&quot;</span>: <span class="string">&quot;latexmk&quot;</span>,</span><br><span class="line">    <span class="string">&quot;args&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;-synctex=1&quot;</span>,</span><br><span class="line">      <span class="string">&quot;-interaction=nonstopmode&quot;</span>,</span><br><span class="line">      <span class="string">&quot;-file-line-error&quot;</span>,</span><br><span class="line">      <span class="string">&quot;-pdf&quot;</span>,</span><br><span class="line">      <span class="string">&quot;%DOC%&quot;</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">    <span class="string">&quot;command&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">    <span class="string">&quot;args&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;-synctex=1&quot;</span>,</span><br><span class="line">      <span class="string">&quot;-interaction=nonstopmode&quot;</span>,</span><br><span class="line">      <span class="string">&quot;-file-line-error&quot;</span>,</span><br><span class="line">      <span class="string">&quot;%DOC%&quot;</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">    <span class="string">&quot;command&quot;</span>: <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">    <span class="string">&quot;args&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;%DOCFILE%&quot;</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>使用bibliography务必使用build project下的最后一项Recipe:XeLaTeX-&gt;…</li>
+</ol>
+<hr>
+<h2 id="HTML-amp-css-amp-Js"><a href="#HTML-amp-css-amp-Js" class="headerlink" title="HTML&amp;css&amp;Js"></a>HTML&amp;css&amp;Js</h2><ol>
+<li>安装扩展<ol>
+<li>Easy LESS（less必备，但是使用的less核心版本有点老）</li>
+<li>HTML Boilerplate</li>
+<li>HTML CSS Support</li>
+<li>HTML Snippets</li>
+<li>JS &amp; CSS Minifier (Minify) 压缩必备</li>
+<li>Less IntelliSense</li>
+<li>Live Server(<strong>必装</strong>)</li>
+<li>Browser Preview（可以在vscode里打开浏览器标签，但是偶尔模糊，没mactype勿用）</li>
+</ol>
+</li>
+<li>作为一个前端工程师，一般我们需要实时预览网页，这需要自动保存，方法在最后面，然后想浏览器预览时选择右下方的live share即可，但是有点麻烦，我想设置一快捷键<br>我一般是用coderunner运行文件的，运行是<code>Ctrl+Alt+N</code>但是coderunner无法运行html，所以我们可以设置快捷键，这里我们这样写<br>首先按’按键录制’，按原快捷键的组合，然后右键，更改键绑定，按压<code>Ctrl+Alt+N</code>，对于冲突选择’是’,然后同样按键录制，<code>Ctrl+Alt+N</code>修改如下<br><img data-src="https://img-blog.csdnimg.cn/20200302085817998.png" alt="在这里插入图片描述"><br>修改’当’内的内容请右键条目，选择修改when表达式<br>LiveShare输入：<code>editorLangId == &#39;html&#39;</code><br>Coderunner输入：<code>-</code><br>完事</li>
+<li>关于min和less，直接使用即可</li>
+</ol>
+<p><strong>可能还有一些好用的插件，以后更新(挖坑)</strong></p>
+<hr>
+<h2 id="R语言"><a href="#R语言" class="headerlink" title="R语言"></a>R语言</h2><p>由于我们学校与奥克兰大学(Home Of R)微妙的关系，要用这个做数据分析，R太小众了，使用特别麻烦</p>
+<ol>
+<li>安装R环境，这个不说了</li>
+<li>安装插件<ol>
+<li>R（必装）</li>
+<li>CodeRunner</li>
+<li>R LSP Client</li>
+<li>R Tool（选装，扩展要老版本的.Net有点麻烦）</li>
+</ol>
+</li>
+<li>在R环境中配置以与vscode桥接：R下输入</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages(&quot;languageserver&quot;)</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>安装多彩R终端<br>需要python环境，然后</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U radian</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li><p>cmd下输入<code>which radian</code>复制返回值<br>vscode设置中输入<code>Rterm</code>，选择扩展-&gt;r-&gt;Rterm:windows<br>输入刚刚复制的内容</p>
+</li>
+<li><p>cmd下输入<code>which r</code>复制返回值<br>vscode下ctrl+shift+P<br>输入json，选择<code>首选项打开设置...</code><br>在最后一个<code>&#125;</code><strong>前</strong>写下</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;r.rterm.windows&quot;: &quot;C:\\Users\\tclkr\\AppData\\Local\\Programs\\Python\\Python37\\Scripts\\radian.exe&quot;,</span><br><span class="line">    &quot;r.rterm.option&quot;: [</span><br><span class="line">      &#x2F;&#x2F; &quot;--no-save&quot;,</span><br><span class="line">      &#x2F;&#x2F; &quot;--no-restore&quot;,</span><br><span class="line">      &quot;--no-site-file&quot;  </span><br><span class="line">    ],</span><br></pre></td></tr></table></figure>
+<p>第一行用你复制的地址替换<br>如果出现一个红色波浪线，检查前一行是不是最后忘写<code>,</code>了，补上</p>
+<ol start="7">
+<li>使用方法：<br> a. 想直接运行文件：coderunner运行，<code>Ctrl+Alt+N</code>，他会调用Rscrip但是运行后就关闭了<br> b. <code>Ctrl+Enter</code>下面会有一个radian终端，然后选中要运行的代码<code>ctrl+enter</code>发送到终端，或者<code>source(&quot;./文件名&quot;)</code><br> c. 我正在尝试一种新方法实现使用radian一键运行，具体思路是改coderunner配置为<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;r&quot;: &quot;-join(&#39;source(&#39;,&#39;\&quot;&#39;,&#39;$fileName&#39;,&#39;\&quot;&#39;,&#39;)&#39;) |  radian.exe&quot;,</span><br></pre></td></tr></table></figure>
+radian可以打开，但是无法把管道内容加进去，还望大佬指出</li>
+</ol>
+<hr>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p>Vscode自带git，只需要终端init一下就可以在左边的git中找到，如果想要更强功能，可以安装插件<code>GitLens</code></p>
+<hr>
+<h2 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h2><p>不想写正则了？<br>有一个插件可以插入常用正则<br>就是<code>any-rule</code></p>
+<hr>
+<h2 id="开发实用插件"><a href="#开发实用插件" class="headerlink" title="开发实用插件"></a>开发实用插件</h2><ol>
+<li><p>Bracket Pair Colorizer 2<br>直接安装即可使用，可以实现括号多色，放置错误匹配，并且错了的括号会标红，效果图来自官网<br><img data-src="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2/raw/master/images/forceUniqueOpeningColorDisabled.png" alt="
+"><img data-src="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2/raw/master/images/forceUniqueOpeningColorEnabled.png" alt="
+"><img data-src="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2/raw/master/images/forceIterationColorCycleEnabled.png" alt="
+"><img data-src="https://github.com/CoenraadS/Bracket-Pair-Colorizer-2/raw/master/images/consecutiveExample.png" alt="
+"></p>
+</li>
+<li><p>Svg Preview<br>可以打开svg文件，安装即可使用</p>
+</li>
+<li><p>Remote - WSL<br>直接在WSL下编程</p>
+</li>
+<li><p>Polacode-2019<br>可以把你的代码转为高B格的图片，安装后，当你在需要时，<code>Ctrl+shift+p</code>输入plolacode，点击那个照相机，在你的代码上选中需要转换的部分，选择是否透明(transport)和要不要阴影(shadow)，然后点击下面的快门，即可另存为文件<br>效果如图(官网)<br><img data-src="https://raw.githubusercontent.com/octref/polacode/master/demo/1.png" alt="
+"></p>
+</li>
+<li><p>indent-rainbow<br> 多彩缩减，安装即可使用，错了会标红，python实用，其余语言也可以整一个(官网图)<br><img data-src="https://raw.githubusercontent.com/oderwat/vscode-indent-rainbow/master/assets/example.png" alt="
+"></p>
+</li>
+</ol>
+<p>7.settings Sync<br>可以把你的配置同步到GitHub上防止丢失<br>登陆Github&gt;Your profile&gt; settings&gt;Developer settings&gt;personal access tokens&gt;generate new token，输入名称，勾选Gist，提交<br>保存Github Access Token<br>安装插件，点击login按钮<br>输入GitHub账密<br>设置找到setting sync输入你的gist即可<br><img data-src="https://img-blog.csdnimg.cn/20200302101238624.png" alt="在这里插入图片描述"><br>需要上传配置就<code>ctrl+shift+P</code>输入sync，找到上传，网络不通畅请自行爬一趴<br>可以看到下方显示进度</p>
+<ol start="8">
+<li>待补充(挖坑)</li>
+</ol>
+<h2 id="coderunner用法"><a href="#coderunner用法" class="headerlink" title="coderunner用法"></a>coderunner用法</h2><p>设置-&gt;扩展-&gt;run code config<br><img data-src="https://img-blog.csdnimg.cn/20200302094107398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>蓝色部分与我一致即可</p>
+<h2 id="建议开启：自动保存"><a href="#建议开启：自动保存" class="headerlink" title="建议开启：自动保存"></a>建议开启：自动保存</h2><p>打开设置，第一项就是<br><img data-src="https://img-blog.csdnimg.cn/20200302095050548.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>第一个四个选项意思是：</p>
+<ul>
+<li>关 </li>
+<li>延时多少秒存一次 </li>
+<li>焦点改变 </li>
+<li>窗口改变</li>
+</ul>
+<p>选第二个，下一项配置延时时间</p>
+<h2 id="美化插件"><a href="#美化插件" class="headerlink" title="美化插件"></a>美化插件</h2><p>1.主题美化<br>推荐最火的<code>one dark pro</code>，安装即可使用<br>如果你只用c++可以尝试<code>Dark C++ Theme</code>不要2.0，适配不错，但是莫名看多之后眼疼qwq<br>2.图标包<br>推荐<code>Material Icon Theme</code>,安装即可使用<br>3.背景<br><strong>安装与配置时请<code>以管理员方式运行</code></strong><br><img data-src="https://img-blog.csdnimg.cn/2020030210145071.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>右下角那个东西<br>设置方法<br>下载background插件(同名太多了，看清作者)<br><img data-src="https://img-blog.csdnimg.cn/20200302101553693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xpdWthaXJ1aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后找个地方存下你的背景，复制路径<br>按下下ctrl+shift+P<br>输入json，选择<code>首选项打开设置...</code><br>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&quot;background.useDefault&quot;: false,</span><br><span class="line">    &quot;background.customImages&quot;: [</span><br><span class="line">      &quot;file:&#x2F;&#x2F;&#x2F;C:vscodebg.png&quot;,&#x2F;&#x2F;地址，可以设置三个不同的，在分屏的时候轮流出现三种背景</span><br><span class="line">      &quot;file:&#x2F;&#x2F;&#x2F;C:vscodebg.png&quot;,</span><br><span class="line">      &quot;file:&#x2F;&#x2F;&#x2F;C:vscodebg.png&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;background.style&quot;:&#123;</span><br><span class="line">      &quot;content&quot;: &quot;&#39;&#39;&quot;,</span><br><span class="line">      &quot;pointer-events&quot;: &quot;none&quot;,</span><br><span class="line">      &quot;position&quot;: &quot;absolute&quot;,</span><br><span class="line">      &quot;right&quot;:&quot;10px&quot;,			&#x2F;&#x2F;&#x2F;&#x2F;图片距离右边多少，可以改为right:</span><br><span class="line">      &quot;bottom&quot;:&quot;0px&quot;,			&#x2F;&#x2F;图片距离底部多少，可以改为top:</span><br><span class="line">      &quot;z-index&quot;: &quot;99999&quot;,</span><br><span class="line">      &quot;width&quot;: &quot;100%&quot;,      &quot;height&quot;: &quot;100%&quot;,</span><br><span class="line">      &quot;background-repeat&quot;: &quot;no-repeat&quot;,&#x2F;&#x2F;是否重复显示，就是现实一个还是多个</span><br><span class="line">      &quot;opacity&quot;: 0.2&#x2F;&#x2F;透明度</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<p>如果出现一个红色波浪线，检查前一行是不是最后忘写<code>,</code>了，补上<br>插件原理是修改的vscode的css文件，所以上面都是css选项<br>多图片效果如图(官网)<br><img data-src="https://user-images.githubusercontent.com/9987486/40583705-7105dda8-61c6-11e8-935a-3c5d475a1eb1.gif" alt="
+"><br>然后保存<br>他会提示你重启vscode，选择restart即可<br>然后会出现<br><img data-src="https://user-images.githubusercontent.com/9987486/40583926-b1fb5398-61ca-11e8-8271-4ac650d158d3.png" alt="
+"><br>这是因为我们修改的vscode的css文件，关闭即可，但是，每次都会提示，标题栏也提示[不受信任]这时候需要安装插件Fix VSCode Checksums<br>然后ctrl+shift+P，输入fix Checksums Apply 点击，重启即可正常使用<br>此后，每次更新你都会发现背景没了，插件会自动提示restart来显示，然后选择restart，重启软件后会发现又有不受信任，再次fix即可，每次更新都要来一次<br><strong>注意这个插件卸载时要按介绍页提示卸载，直接卸载无法关闭效果</strong></p>
+<hr>
+<p>这里大致聊了一下Vscode常用配置，大都没有说明插件的用途，以下是我学习时参考网址，可以再次了解相关原理<br>VScode概览<br>    <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017949680">https://segmentfault.com/a/1190000017949680</a><br>C/C++<br>    <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30315894/answer/154979413">https://www.zhihu.com/question/30315894/answer/154979413</a><br>    <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/GNAQ/VSC-guide">https://www.luogu.com.cn/blog/GNAQ/VSC-guide</a><br>R语言<br>    <a target="_blank" rel="noopener" href="https://sspai.com/post/47386">https://sspai.com/post/47386</a><br>LaTeX<br>    <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28303495/article/details/89848209">https://blog.csdn.net/qq_28303495/article/details/89848209</a><br>settings sync<br>    <a target="_blank" rel="noopener" href="https://blog.csdn.net/niexia_/article/details/84063656">https://blog.csdn.net/niexia_/article/details/84063656</a><br>美化与插件<br>    <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/crab-in-northeast/great-features-and-plugins-for-vscode">https://www.luogu.com.cn/blog/crab-in-northeast/great-features-and-plugins-for-vscode</a></p>
+<h2 id="附：我的setting-json文件"><a href="#附：我的setting-json文件" class="headerlink" title="附：我的setting.json文件"></a>附：我的setting.json文件</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;window.zoomLevel&quot;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&quot;python.formatting.provider&quot;</span>: <span class="string">&quot;yapf&quot;</span>,</span><br><span class="line">    <span class="string">&quot;python.linting.flake8Args&quot;</span>: [<span class="string">&quot;--max-line-length=248&quot;</span>],</span><br><span class="line">    <span class="string">&quot;python.linting.pylintEnabled&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;python.linting.pylintArgs&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;--generate-members&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;oneDarkPro.editorTheme&quot;</span>: <span class="string">&quot;Onedark Pro&quot;</span>,</span><br><span class="line">    <span class="string">&quot;workbench.colorTheme&quot;</span>: <span class="string">&quot;One Dark Pro&quot;</span>,</span><br><span class="line">    <span class="string">&quot;code-runner.preserveFocus&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;code-runner.runInTerminal&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;code-runner.saveFileBeforeRun&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;editor.renderWhitespace&quot;</span>: <span class="string">&quot;all&quot;</span>,</span><br><span class="line">    <span class="string">&quot;editor.renderControlCharacters&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;http.proxySupport&quot;</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">    <span class="string">&quot;editor.fontFamily&quot;</span>: <span class="string">&quot;&#x27;JetBrains Mono&#x27;,Consolas, &#x27;Courier New&#x27;, monospace&quot;</span>,</span><br><span class="line">    <span class="string">&quot;editor.suggestSelection&quot;</span>: <span class="string">&quot;first&quot;</span>,</span><br><span class="line">    <span class="string">&quot;vsintellicode.modify.editor.suggestSelection&quot;</span>: <span class="string">&quot;automaticallyOverrodeDefaultValue&quot;</span>,</span><br><span class="line">    <span class="string">&quot;[html]&quot;</span>: &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;files.associations&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;*.html&quot;</span>: <span class="string">&quot;html&quot;</span>,</span><br><span class="line">      <span class="string">&quot;*.txt&quot;</span>: <span class="string">&quot;plaintext&quot;</span>,</span><br><span class="line">      <span class="string">&quot;*.rmd&quot;</span>: <span class="string">&quot;markdown&quot;</span>,</span><br><span class="line">      <span class="string">&quot;array&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;atomic&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;*.tcc&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cctype&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;clocale&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cmath&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cstdarg&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cstddef&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cstdint&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cstdio&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cstdlib&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cstring&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cwchar&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cwctype&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;deque&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;unordered_map&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;vector&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;exception&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;algorithm&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;memory&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;memory_resource&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;optional&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;string&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;string_view&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;system_error&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;tuple&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;type_traits&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;utility&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;fstream&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;initializer_list&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;iosfwd&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;iostream&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;istream&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;limits&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;new&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;ostream&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;sstream&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;stdexcept&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;streambuf&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">      <span class="string">&quot;typeinfo&quot;</span>: <span class="string">&quot;cpp&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;python.jediEnabled&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;powermode.enabled&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;powermode.comboTimeout&quot;</span>: <span class="number">1000</span>,</span><br><span class="line">    <span class="string">&quot;powermode.comboThreshold&quot;</span>: <span class="number">3</span>,</span><br><span class="line">    <span class="string">&quot;powermode.shakeIntensity&quot;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&quot;powermode.explosionOffset&quot;</span>: <span class="number">0.3</span>,</span><br><span class="line">    <span class="string">&quot;tabout.disableByDefault&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;background.useDefault&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;background.customImages&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;file:///C:vscodebg.png&quot;</span>,<span class="comment">//背景图片地址</span></span><br><span class="line">      <span class="string">&quot;file:///C:vscodebg.png&quot;</span>,</span><br><span class="line">      <span class="string">&quot;file:///C:vscodebg.png&quot;</span></span><br><span class="line">      <span class="comment">//如果你很好奇为什么得重复三遍，读者自证（划掉）参见说明</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;background.style&quot;</span>:&#123;</span><br><span class="line">      <span class="string">&quot;content&quot;</span>: <span class="string">&quot;&#x27;&#x27;&quot;</span>,</span><br><span class="line">      <span class="string">&quot;pointer-events&quot;</span>: <span class="string">&quot;none&quot;</span>,</span><br><span class="line">      <span class="string">&quot;position&quot;</span>: <span class="string">&quot;absolute&quot;</span>,</span><br><span class="line">      <span class="string">&quot;right&quot;</span>:<span class="string">&quot;10px&quot;</span>,</span><br><span class="line">      <span class="string">&quot;bottom&quot;</span>:<span class="string">&quot;0px&quot;</span>,<span class="comment">//-47px&quot;,</span></span><br><span class="line">      <span class="string">&quot;z-index&quot;</span>: <span class="string">&quot;99999&quot;</span>,</span><br><span class="line">      <span class="comment">//熟悉css的同学肯定明白上面是什么意思。这个是不用改的。</span></span><br><span class="line">      <span class="string">&quot;width&quot;</span>: <span class="string">&quot;100%&quot;</span>,<span class="comment">//背景图片缩放有多宽</span></span><br><span class="line">      <span class="string">&quot;height&quot;</span>: <span class="string">&quot;100%&quot;</span>,<span class="comment">//背景图片缩放有多高</span></span><br><span class="line">      <span class="string">&quot;background-repeat&quot;</span>: <span class="string">&quot;no-repeat&quot;</span>,<span class="comment">//这个也不用改</span></span><br><span class="line">      <span class="string">&quot;opacity&quot;</span>: <span class="number">0.2</span><span class="comment">//透明程度。其实普通的需求改这个就行了qwq</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;powermode.enableShake&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;powermode.enableStatusBarComboCounter&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;powermode.enableStatusBarComboTimer&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;files.autoSave&quot;</span>: <span class="string">&quot;afterDelay&quot;</span>,</span><br><span class="line">    <span class="string">&quot;polacode.target&quot;</span>: <span class="string">&quot;snippet&quot;</span>,</span><br><span class="line">    <span class="string">&quot;workbench.iconTheme&quot;</span>: <span class="string">&quot;material-icon-theme&quot;</span>,</span><br><span class="line">    <span class="string">&quot;sync.gist&quot;</span>: <span class="string">&quot;ac3709c566f85d9b6a44ff1dda335967&quot;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">//R Language config @ https://sspai.com/post/47386</span></span><br><span class="line">    <span class="comment">//Pay Attention to config the tenminal</span></span><br><span class="line">    <span class="comment">//pip install -U radian</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;r.rterm.windows&quot;</span>: <span class="string">&quot;C:\\Users\\tclkr\\AppData\\Local\\Programs\\Python\\Python37\\Scripts\\radian.exe&quot;</span>,</span><br><span class="line">    <span class="string">&quot;r.rterm.option&quot;</span>: [</span><br><span class="line">      <span class="comment">// &quot;--no-save&quot;,</span></span><br><span class="line">      <span class="comment">// &quot;--no-restore&quot;,</span></span><br><span class="line">      <span class="string">&quot;--no-site-file&quot;</span>  </span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;r.rpath.lsp&quot;</span>: <span class="string">&quot;C:\\Program Files\\R\\R-3.6.2\\bin\\x64\\R.exe&quot;</span>,</span><br><span class="line">    <span class="string">&quot;code-runner.executorMap&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;javascript&quot;</span>: <span class="string">&quot;node&quot;</span>,</span><br><span class="line">      <span class="string">&quot;java&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&quot;</span>,</span><br><span class="line">      <span class="string">&quot;c&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span>,</span><br><span class="line">      <span class="string">&quot;cpp&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span>,</span><br><span class="line">      <span class="string">&quot;objective-c&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; gcc -framework Cocoa $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span>,</span><br><span class="line">      <span class="string">&quot;php&quot;</span>: <span class="string">&quot;php&quot;</span>,</span><br><span class="line">      <span class="string">&quot;python&quot;</span>: <span class="string">&quot;python -u&quot;</span>,</span><br><span class="line">      <span class="string">&quot;perl&quot;</span>: <span class="string">&quot;perl&quot;</span>,</span><br><span class="line">      <span class="string">&quot;perl6&quot;</span>: <span class="string">&quot;perl6&quot;</span>,</span><br><span class="line">      <span class="string">&quot;ruby&quot;</span>: <span class="string">&quot;ruby&quot;</span>,</span><br><span class="line">      <span class="string">&quot;go&quot;</span>: <span class="string">&quot;go run&quot;</span>,</span><br><span class="line">      <span class="string">&quot;lua&quot;</span>: <span class="string">&quot;lua&quot;</span>,</span><br><span class="line">      <span class="string">&quot;groovy&quot;</span>: <span class="string">&quot;groovy&quot;</span>,</span><br><span class="line">      <span class="string">&quot;powershell&quot;</span>: <span class="string">&quot;powershell -ExecutionPolicy ByPass -File&quot;</span>,</span><br><span class="line">      <span class="string">&quot;bat&quot;</span>: <span class="string">&quot;cmd /c&quot;</span>,</span><br><span class="line">      <span class="string">&quot;shellscript&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">      <span class="string">&quot;fsharp&quot;</span>: <span class="string">&quot;fsi&quot;</span>,</span><br><span class="line">      <span class="string">&quot;csharp&quot;</span>: <span class="string">&quot;scriptcs&quot;</span>,</span><br><span class="line">      <span class="string">&quot;vbscript&quot;</span>: <span class="string">&quot;cscript //Nologo&quot;</span>,</span><br><span class="line">      <span class="string">&quot;typescript&quot;</span>: <span class="string">&quot;ts-node&quot;</span>,</span><br><span class="line">      <span class="string">&quot;coffeescript&quot;</span>: <span class="string">&quot;coffee&quot;</span>,</span><br><span class="line">      <span class="string">&quot;scala&quot;</span>: <span class="string">&quot;scala&quot;</span>,</span><br><span class="line">      <span class="string">&quot;swift&quot;</span>: <span class="string">&quot;swift&quot;</span>,</span><br><span class="line">      <span class="string">&quot;julia&quot;</span>: <span class="string">&quot;julia&quot;</span>,</span><br><span class="line">      <span class="string">&quot;crystal&quot;</span>: <span class="string">&quot;crystal&quot;</span>,</span><br><span class="line">      <span class="string">&quot;ocaml&quot;</span>: <span class="string">&quot;ocaml&quot;</span>,</span><br><span class="line"></span><br><span class="line">      </span><br><span class="line">      <span class="string">&quot;r&quot;</span>: <span class="string">&quot;Rscript&quot;</span>,</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// &quot;r&quot;: &quot;-join(&#x27;source(&#x27;,&#x27;\&quot;&#x27;,&#x27;$fileName&#x27;,&#x27;\&quot;&#x27;,&#x27;)&#x27;) |  r.exe --no-save&quot;,</span></span><br><span class="line">      </span><br><span class="line">      <span class="comment">// &quot;r&quot;: &quot;-join(&#x27;source(&#x27;,&#x27;\&quot;&#x27;,&#x27;$fileName&#x27;,&#x27;\&quot;&#x27;,&#x27;)&#x27;) |  radian.exe&quot;,</span></span><br><span class="line">      </span><br><span class="line">      <span class="string">&quot;applescript&quot;</span>: <span class="string">&quot;osascript&quot;</span>,</span><br><span class="line">      <span class="string">&quot;clojure&quot;</span>: <span class="string">&quot;lein exec&quot;</span>,</span><br><span class="line">      <span class="string">&quot;haxe&quot;</span>: <span class="string">&quot;haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt&quot;</span>,</span><br><span class="line">      <span class="string">&quot;rust&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; rustc $fileName &amp;&amp; $dir$fileNameWithoutExt&quot;</span>,</span><br><span class="line">      <span class="string">&quot;racket&quot;</span>: <span class="string">&quot;racket&quot;</span>,</span><br><span class="line">      <span class="string">&quot;scheme&quot;</span>: <span class="string">&quot;csi -script&quot;</span>,</span><br><span class="line">      <span class="string">&quot;ahk&quot;</span>: <span class="string">&quot;autohotkey&quot;</span>,</span><br><span class="line">      <span class="string">&quot;autoit&quot;</span>: <span class="string">&quot;autoit3&quot;</span>,</span><br><span class="line">      <span class="string">&quot;dart&quot;</span>: <span class="string">&quot;dart&quot;</span>,</span><br><span class="line">      <span class="string">&quot;pascal&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; fpc $fileName &amp;&amp; $dir$fileNameWithoutExt&quot;</span>,</span><br><span class="line">      <span class="string">&quot;d&quot;</span>: <span class="string">&quot;cd $dir &amp;&amp; dmd $fileName &amp;&amp; $dir$fileNameWithoutExt&quot;</span>,</span><br><span class="line">      <span class="string">&quot;haskell&quot;</span>: <span class="string">&quot;runhaskell&quot;</span>,</span><br><span class="line">      <span class="string">&quot;nim&quot;</span>: <span class="string">&quot;nim compile --verbosity:0 --hints:off --run&quot;</span>,</span><br><span class="line">      <span class="string">&quot;lisp&quot;</span>: <span class="string">&quot;sbcl --script&quot;</span>,</span><br><span class="line">      <span class="string">&quot;kit&quot;</span>: <span class="string">&quot;kitc --run&quot;</span>,</span><br><span class="line">      <span class="string">&quot;v&quot;</span>: <span class="string">&quot;v run&quot;</span>,</span><br><span class="line">      <span class="string">&quot;sass&quot;</span>: <span class="string">&quot;sass --style expanded&quot;</span>,</span><br><span class="line">      <span class="string">&quot;scss&quot;</span>: <span class="string">&quot;scss --style expa,nded&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;r.linting.trailingWhitespace&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;r.linting.trailingBlankLines&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;r.linting.trueFalseNames&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;r.lsp.debug&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;editor.wordWrap&quot;</span>: <span class="string">&quot;on&quot;</span>,</span><br><span class="line">    <span class="comment">//LaTeX config from CSDN</span></span><br><span class="line">    <span class="string">&quot;latex-workshop.latex.recipes&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">        <span class="string">&quot;tools&quot;</span>: [</span><br><span class="line">          <span class="string">&quot;xelatex&quot;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;xelatex -&gt; bibtex -&gt; xelatex*2&quot;</span>,</span><br><span class="line">        <span class="string">&quot;tools&quot;</span>: [</span><br><span class="line">          <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">          <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">          <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">          <span class="string">&quot;xelatex&quot;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;latex-workshop.latex.tools&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;latexmk&quot;</span>,</span><br><span class="line">        <span class="string">&quot;command&quot;</span>: <span class="string">&quot;latexmk&quot;</span>,</span><br><span class="line">        <span class="string">&quot;args&quot;</span>: [</span><br><span class="line">          <span class="string">&quot;-synctex=1&quot;</span>,</span><br><span class="line">          <span class="string">&quot;-interaction=nonstopmode&quot;</span>,</span><br><span class="line">          <span class="string">&quot;-file-line-error&quot;</span>,</span><br><span class="line">          <span class="string">&quot;-pdf&quot;</span>,</span><br><span class="line">          <span class="string">&quot;%DOC%&quot;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">        <span class="string">&quot;command&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">        <span class="string">&quot;args&quot;</span>: [</span><br><span class="line">          <span class="string">&quot;-synctex=1&quot;</span>,</span><br><span class="line">          <span class="string">&quot;-interaction=nonstopmode&quot;</span>,</span><br><span class="line">          <span class="string">&quot;-file-line-error&quot;</span>,</span><br><span class="line">          <span class="string">&quot;%DOC%&quot;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">        <span class="string">&quot;command&quot;</span>: <span class="string">&quot;bibtex&quot;</span>,</span><br><span class="line">        <span class="string">&quot;args&quot;</span>: [</span><br><span class="line">          <span class="string">&quot;%DOCFILE%&quot;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;latex-preview.command&quot;</span>: <span class="string">&quot;xelatex&quot;</span>,</span><br><span class="line">    <span class="comment">//auto compress</span></span><br><span class="line">    <span class="string">&quot;latex-workshop.latex.autoBuild.run&quot;</span>: <span class="string">&quot;never&quot;</span>,</span><br><span class="line">    <span class="comment">// Error Page XXX on XXX not ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="附：目前在用的扩展"><a href="#附：目前在用的扩展" class="headerlink" title="附：目前在用的扩展"></a>附：目前在用的扩展</h2><p><img data-src="https://img-blog.csdnimg.cn/20200318002051881.png" alt="在这里插入图片描述"><br><img data-src="https://img-blog.csdnimg.cn/20200318002107831.png" alt="在这里插入图片描述"><br><img data-src="https://img-blog.csdnimg.cn/20200318002129312.png" alt="在这里插入图片描述"><br><img data-src="https://img-blog.csdnimg.cn/20200318002145270.png" alt="在这里插入图片描述"><br><img data-src="https://img-blog.csdnimg.cn/20200318002159268.png" alt="在这里插入图片描述"></p>
+<hr>
+<h1 id="完结撒花"><a href="#完结撒花" class="headerlink" title="完结撒花"></a>完结撒花</h1>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">推荐阅读</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Vim使用全指南(环境配置,插件推荐,美化)(C++,Python,MarkDown,R...)/" rel="bookmark">Vim使用全指南(环境配置,插件推荐,美化)(C++,Python,MarkDown,R...)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>LiuKairui
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://liukairui.cc/vscode%E4%BD%BF%E7%94%A8%E5%85%A8%E6%8C%87%E5%8D%97(%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90,%E7%BE%8E%E5%8C%96)(C++,Python,LaTeX,R...)/" title="vscode使用全指南(环境配置,插件推荐,美化)(C++,Python,LaTeX,R...)">http://liukairui.cc/vscode使用全指南(环境配置,插件推荐,美化)(C++,Python,LaTeX,R...)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+              <a href="/tags/IDE/" rel="tag"><i class="fa fa-tag"></i> IDE</a>
+              <a href="/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" rel="tag"><i class="fa fa-tag"></i> 杂七杂八</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A51%E9%A2%98%E8%A7%A3/" rel="next" title="2020牛客寒假算法基础集训营1题解">
+                  2020牛客寒假算法基础集训营1题解 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">晋 ICP 备 19015041 号 - 2 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuKairui</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><script
+  async
+  src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+
+ 
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-precise-range-plugin@1.3.0/moment-precise-range.min.js"></script>
+<script>
+  function timer() {
+    var ages = moment.preciseDiff(moment(),moment(20201101,"YYYYMMDD"));
+    ages = ages.replace(/years?/, "年");
+    ages = ages.replace(/months?/, "月");
+    ages = ages.replace(/days?/, "天");
+    ages = ages.replace(/hours?/, "小时");
+    ages = ages.replace(/minutes?/, "分");
+    ages = ages.replace(/seconds?/, "秒");
+    ages = ages.replace(/\d+/g, '<span class="daysCnt" style="color:#1890ff">$&</span>');
+    div.innerHTML = `我已在此等候你 ${ages}`;
+    div.className="workDays";
+  }
+  var div = document.createElement("div");
+  //插入到copyright之后
+  var copyright = document.querySelector(".copyright");
+  document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+  timer();
+  setInterval("timer()",1000)
+</script>
+
+
+ 
+<script>
+  var beian=document.querySelector("body > footer > div > div.beian > a");
+  var cpr=document.querySelector("body > footer > div > div.copyright");
+  cpr.appendChild(beian);
+  document.querySelector("#busuanzi_container_site_uv > span.post-meta-item-icon").remove();
+  document.querySelector("#busuanzi_container_site_pv > span.post-meta-item-icon").remove();
+  var cnz=document.querySelector(".workDays");//.parentNode;
+  var bsz=document.querySelector(".busuanzi-count");
+  if(cnz!=null&&bsz!=null){
+    cnz.parentNode.insertBefore(bsz,cnz);
+    //console.log("***",cnz.parentNode.insertBefore(bsz,cnz));
+  }
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.2/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+
+  <script>
+    NProgress.configure({
+      showSpinner: true
+    });
+    NProgress.start();
+    document.addEventListener('readystatechange', () => {
+      if (document.readyState === 'interactive') {
+        NProgress.inc(0.8);
+      }
+      if (document.readyState === 'complete') {
+        NProgress.done();
+      }
+    });
+    document.addEventListener('pjax:send', () => {
+      NProgress.start();
+    });
+    document.addEventListener('pjax:success', () => {
+      NProgress.done();
+    });
+  </script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <div style="display: none;">
+    <script data-pjax src="//s95.cnzz.com/z_stat.php?id=1279392499&web_id=1279392499"></script>
+  </div>
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({"enable":true,"appId":"ABKlVtS4cyaWYEwunPyK3sXt-9Nh9j0Va","appKey":"xxGXdTTEGEVifs2TLB35844I","serverURLs":"https://abklvts4.lc-cn-e1-shared.com","placeholder":"请开始你的表演","avatar":"identicon","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[]}, {
+      el: '#valine-comments',
+      path: "/vscode%E4%BD%BF%E7%94%A8%E5%85%A8%E6%8C%87%E5%8D%97(%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90,%E7%BE%8E%E5%8C%96)(C++,Python,LaTeX,R...)/",
+      serverURLs: "https://abklvts4.lc-cn-e1-shared.com"
+    }));
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  <script async src="/js/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+  <script src="https://liukairuicc-1256424792.cos.ap-nanjing.myqcloud.com/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效 记得同步到header.njk
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('body>main>header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        //
+        //  $('body>main>header>aside').wobbleWindow({
+        //    radius: 50,
+        //    movementLeft: false,
+        //    movementTop: false,
+        //    movementBottom: false,
+        //    position: 'fixed',
+        //    debug: false,
+        //  });
+        //
+
+        
+          $('body>footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>
