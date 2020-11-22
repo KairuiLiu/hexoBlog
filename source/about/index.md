@@ -2,6 +2,7 @@
 title: 关于
 date: 2020-10-31 02:39:50
 comments: false
+toc: false
 ---
 
 # 关于我
@@ -13,7 +14,7 @@ comments: false
 
 #### Version
 
-庚子 · 立冬 (build 20201116025723)
+庚子 · 小雪 (build 20201122094500)
 
 #### Powered by:
 
@@ -28,6 +29,7 @@ comments: false
 #### 已知Bug
 
 - [ ] Valine `serverURLs` 随机异常
+- [ ] 目录关闭异常
 
 #### Todo List
 
@@ -40,6 +42,8 @@ comments: false
 如果您有兴趣帮助我解决上述Bug，请联系我 `QQ 1104886256`，报酬：￥20/条
 
 # 更新日志
+- 庚子 · 小雪 (build 20201122094500)
+  - 修复了: mermaid显示不清晰
 - 庚子 · 立冬 (build 20201116025723)
   - 第一个正式版本
   - 修复了: 不蒜子找不到`busuanzi-counter.swig`
