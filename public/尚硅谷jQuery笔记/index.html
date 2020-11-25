@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+  <script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"liukairui.cc","root":"/","scheme":"Muse","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="jQuery是JS的一个封装的库函数集,用于DOM的CRUD,以查询见长,同时减少了开发者对于浏览器兼容性与变量作用域的考量,来自尚硅谷2018张晓飞版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="尚硅谷 jQuery 笔记">
+<meta property="og:url" content="http://liukairui.cc/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="LiuKairui Blog">
+<meta property="og:description" content="jQuery是JS的一个封装的库函数集,用于DOM的CRUD,以查询见长,同时减少了开发者对于浏览器兼容性与变量作用域的考量,来自尚硅谷2018张晓飞版">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-24T13:40:50.000Z">
+<meta property="article:modified_time" content="2020-11-25T00:30:00.444Z">
+<meta property="article:author" content="LiuKairui">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://liukairui.cc/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script> 
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "谢谢离开" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "欢迎归来" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+<script>
+
+    var endlineInterval=setInterval(function(){
+      if(!document.querySelector(".liukairuipostendline")){
+        $("body > main > div.main-inner.post.posts-expand > div.post-block.animated.fadeIn > article > div.popular-posts-header").prepend('<div class="liukairuipostendline" style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-coffee"></i>感谢您的阅读-------------</div>');
+      }
+    },2000);
+
+</script>
+
+  <title>尚硅谷 jQuery 笔记 | LiuKairui Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="LiuKairui Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">LiuKairui Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-杂">
+
+    <a href="/miscellaneous/" rel="section"><i class="fa fa-ghost fa-fw"></i>杂</a>
+
+  </li>
+        <li class="menu-item menu-item-留言板">
+
+    <a href="/messageBoard/" rel="section"><i class="fab fa-facebook-messenger fa-fw"></i>留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+  <script>
+    //只在桌面版网页启用特效 记得同步到body-end.njk
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('body>main>header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        //
+        //  $('body>main>header>aside').wobbleWindow({
+        //    radius: 50,
+        //    movementLeft: false,
+        //    movementTop: false,
+        //    movementBottom: false,
+        //    position: 'fixed',
+        //    debug: false,
+        //  });
+        //
+
+        
+          $('body>footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+      });
+    }
+
+  </script>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3jQuery"><span class="nav-number">1.</span> <span class="nav-text">了解jQuery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">jQuery的基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E7%9A%84%E4%B8%A4%E6%8A%8A%E5%88%A9%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">jQuery的两把利器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">jQuery函数的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">jQuery对象的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">jQuery选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">$工具的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9ATab%E7%82%B9%E5%87%BB%E5%88%87%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">多Tab点击切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E5%B1%9E%E6%80%A7"><span class="nav-number">9.</span> <span class="nav-text">jQuery属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E6%A8%A1%E5%9D%97"><span class="nav-number">10.</span> <span class="nav-text">CSS模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E4%BD%8D%E7%BD%AE%E6%A8%A1%E5%9D%97"><span class="nav-number">11.</span> <span class="nav-text">CSS位置模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%BB%9A%E5%8A%A8"><span class="nav-number">12.</span> <span class="nav-text">实现滚动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84%E5%B0%BA%E5%AF%B8"><span class="nav-number">13.</span> <span class="nav-text">元素的尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%AD%9B%E9%80%89"><span class="nav-number">14.</span> <span class="nav-text">对象的筛选</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E7%9A%84%E6%96%87%E6%A1%A3%E5%A4%84%E7%90%86"><span class="nav-number">15.</span> <span class="nav-text">jQuery的文档处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6"><span class="nav-number">16.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AE%E6%92%AD%E5%9B%BE"><span class="nav-number">17.</span> <span class="nav-text">轮播图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%88%E6%9E%9C"><span class="nav-number">18.</span> <span class="nav-text">效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%BA%93%E5%85%B1%E5%AD%98"><span class="nav-number">19.</span> <span class="nav-text">多库共存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fun-%E4%B8%8Ewindow-onload-function-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">20.</span> <span class="nav-text">$(fun()&amp;#123;&amp;#125;)与window.onload&#x3D;function()&amp;#123;&amp;#125;的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E6%8F%92%E4%BB%B6"><span class="nav-number">21.</span> <span class="nav-text">jQuery插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%AC%E4%B8%9C%E5%95%86%E5%93%81%E9%A1%B5"><span class="nav-number">22.</span> <span class="nav-text">京东商品页</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiuKairui"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">LiuKairui</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/KairuiLiu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;KairuiLiu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tclkr@live.com" title="E-Mail → mailto:tclkr@live.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=oaf3ToOlN17hr5sHV98bT8qxsNYGaw5L&noverify=0" title="QQ → https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;oaf3ToOlN17hr5sHV98bT8qxsNYGaw5L&amp;noverify&#x3D;0" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://liukairui.blog.csdn.net/" title="CSDN → https:&#x2F;&#x2F;liukairui.blog.csdn.net" rel="noopener" target="_blank"><i class="fab fa-cuttlefish fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://liukairui.me/" title="Another Site → http:&#x2F;&#x2F;liukairui.me" rel="noopener" target="_blank"><i class="fa fa-globe fa-fw"></i>Another Site</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://paste.ubuntu.com/" title="https:&#x2F;&#x2F;paste.ubuntu.com&#x2F;" rel="noopener" target="_blank">Ubuntu Pastebin</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://send.firefox.com/" title="https:&#x2F;&#x2F;send.firefox.com&#x2F;" rel="noopener" target="_blank">Firefox Send</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.godder.top/" title="https:&#x2F;&#x2F;blog.godder.top&#x2F;" rel="noopener" target="_blank">朽木自雕</a>
+        </li>
+    </ul>
+  </div>
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/" title="尚硅谷 jQuery 笔记" target="_blank">尚硅谷 jQuery 笔记</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7JavaScript%E8%BF%9B%E9%98%B6%E7%89%88%E7%AC%94%E8%AE%B0/" title="尚硅谷 JavaScript 进阶版笔记" target="_blank">尚硅谷 JavaScript 进阶版笔记</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7JavaScript%E5%9F%BA%E7%A1%80%E7%89%88%E7%AC%94%E8%AE%B0/" title="尚硅谷 JavaScript 基础版笔记" target="_blank">尚硅谷 JavaScript 基础版笔记</a>
+          </li>
+        
+          <li>
+            <a href="/C%E8%AF%AD%E8%A8%80switch%E7%9A%84%E8%8C%83%E5%9B%B4%E5%88%A4%E6%96%AD%E8%A1%A8%E8%BE%BE%E6%B3%95/" title="C语言switch的范围判断表达法" target="_blank">C语言switch的范围判断表达法</a>
+          </li>
+        
+          <li>
+            <a href="/Html5%E7%9A%84%E9%9F%B3%E8%A7%86%E9%A2%91%E6%A0%87%E7%AD%BE%E4%B8%8E%E6%96%B0%E5%A2%9E%E5%86%B7%E9%97%A8%E6%A0%87%E7%AD%BE/" title="Html5的音视频标签与新增冷门标签" target="_blank">Html5的音视频标签与新增冷门标签</a>
+          </li>
+        
+      </ul>
+    </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://liukairui.cc/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="LiuKairui">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LiuKairui Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          尚硅谷 jQuery 笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-24 21:40:50" itemprop="dateCreated datePublished" datetime="2020-11-24T21:40:50+08:00">2020-11-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-25 08:30:00" itemprop="dateModified" datetime="2020-11-25T08:30:00+08:00">2020-11-25</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="尚硅谷 jQuery 笔记" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>32k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>29 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">jQuery是JS的一个封装的库函数集,用于DOM的CRUD,以查询见长,同时减少了开发者对于浏览器兼容性与变量作用域的考量,来自尚硅谷2018张晓飞版</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="了解jQuery"><a href="#了解jQuery" class="headerlink" title="了解jQuery"></a>了解jQuery</h2><p>画页面</p>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+</ul>
+<p>交互(动态效果)</p>
+<ul>
+<li>JS基础(ES,语法)</li>
+<li>JS的DOM与BOM</li>
+</ul>
+<p>存在的问题</p>
+<ul>
+<li>DOM的语法太麻烦(尤其是插入元素)</li>
+</ul>
+<p>界面的操作: CRUD(增删改查),最难的是查询(文档树纷繁复杂)</p>
+<p>jQuery是一个优秀的JS函数库(就是封装了DOM与BOM)是中大型开发的首选(当然现在有了React,Vue)</p>
+<p>注意第二个字母是大写的</p>
+<p>插件:jQuery是DOM的插件,依赖于jQuery的库是jQuery的插件</p>
+<p>特性:</p>
+<ul>
+<li>HTML的元素选取(选择器): jQuery扩展了CSS的选择器</li>
+<li>HTML元素操作</li>
+<li>CSS操作</li>
+<li>HTML事件处理(交互)</li>
+<li>JS动画效果</li>
+<li>链式调用:支持<code>a().b().c()...</code></li>
+<li>读写合一: 获取元素属性与修改是用的一个函数</li>
+<li>浏览器兼容</li>
+<li>插件多</li>
+<li>ajax封装</li>
+</ul>
+<h2 id="jQuery的基本用法"><a href="#jQuery的基本用法" class="headerlink" title="jQuery的基本用法"></a>jQuery的基本用法</h2><p>jQuery的不同版本</p>
+<ul>
+<li>1.x 兼容老IE,文件大</li>
+<li>2.x 部分IE8以下不支持,文件小,效率高</li>
+<li>3.x 完全不支持IE8-,完全支持IE9+,提供新API,有不包含ajax,动画API的版本</li>
+</ul>
+<p>打开jQuery的源文件可以看到,整个文件就是一个匿名函数自调用,1.10.1的文件9793行是唯一暴露API的地方,<code>window.jQuery=window.$=jQuery</code>只暴露了两个对象,在61行定义了jQuery函数</p>
+<ul>
+<li><p>引入jQuery库</p>
+<ul>
+<li>测试用没压缩的,上线用压缩的</li>
+<li>引用在使用之前</li>
+<li>测试的时候: 本地引入</li>
+<li>项目上线为了减轻服务器负担可以使用CDN远程库,例如<code>https://www.bootcdn.cn/</code></li>
+</ul>
+</li>
+<li><p>使用jQuery的核心函数(<code>jQuery</code>/<code>$</code>),注意大小写</p>
+</li>
+<li><p>使用jQuery核心对象, <code>var $tmp=$(&quot;tmp&quot;)</code>指的是操作核心函数返回的对象,一般为了标注这个是jQuery写的,变量名前加<code>$</code></p>
+</li>
+</ul>
+<p>输出input的内容,双版本</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/jquery-3.5.1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 原生DOM</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> btn1=<span class="built_in">document</span>.querySelector(<span class="string">&quot;#btn1&quot;</span>);</span></span><br><span class="line"><span class="javascript">            btn1.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> usrname=<span class="built_in">document</span>.querySelector(<span class="string">&quot;input&quot;</span>).value;</span></span><br><span class="line">                alert(usrname);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 绑定文档加载的监听,虽然不知道为什么有了$就算是文档加载结束了</span></span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">&quot;#btn2&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 给btn2添加事件</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> username=$(<span class="string">&quot;input&quot;</span>).val(); <span class="comment">//val()就是.value</span></span></span><br><span class="line">                alert(username);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    用户名: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn1&quot;</span>&gt;</span>OK 原生<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn2&quot;</span>&gt;</span>OK jQuery<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>$(function()&#123;&#125;)</code>相当于是文档加载完成监听<code>window.onload=function()&#123;&#125;</code></li>
+<li><code>$(&quot;XXX&quot;)</code>相当于是<code>document.querySelector(&quot;XXX&quot;)</code></li>
+<li><code>.val()</code>就是获取元素的<code>.value</code></li>
+</ul>
+<h2 id="jQuery的两把利器"><a href="#jQuery的两把利器" class="headerlink" title="jQuery的两把利器"></a>jQuery的两把利器</h2><ul>
+<li>核心函数: <code>jQuery</code>/<code>$</code>,两者相同(测试<code>jQuery===$</code>)</li>
+<li>核心对象: 核心函数得到, 也就是一个对象(测试<code>$() instanceof Object</code>)</li>
+</ul>
+<p>?? 头函数的undefined </p>
+<h2 id="jQuery函数的使用"><a href="#jQuery函数的使用" class="headerlink" title="jQuery函数的使用"></a>jQuery函数的使用</h2><p>不论什么框架,回调函数的this就是出发这个函数的DOM的对象</p>
+<ul>
+<li><p>作为一个函数去调用</p>
+<ul>
+<li>jQuery支持多态,所以存在函数的重载(有argument还能这样搞…)</li>
+<li>$(Function) 当DOM加载结束后执行回调函数</li>
+<li>$(选择器字符串) 查找所有匹配对象的标签,将他们封装成jQuery对象,注意此时尝试输出<code>console.log($(&quot;input&quot;));</code>的结果是<code>jQuery.fn.init(2) [input, input, prevObject: jQuery.fn.init(1)]</code></li>
+<li>$(DOM对象): 返回将这个参数包装成jQuery对象的对象,从而可以调用jQuery对象的方法</li>
+<li>$(HTML标签字符串) 创建标签对象,封装成jQUery对象,返回</li>
+<li>Q:为什么这些函数的返回值都是jQuery对象?</li>
+<li>A:因为这是jQuery函数的事例,只能构造jQuery对象</li>
+</ul>
+</li>
+<li><p>作为一个对象去调用</p>
+<ul>
+<li>可以作为工具对象,内部有工具方法</li>
+</ul>
+</li>
+<li><p><code>$obj.html()</code>方法是一个读写合一的函数</p>
+<ul>
+<li><code>.html()</code>返回对象的innerHTML</li>
+<li><code>.html(XX)</code>将对象的innerHTML设置成XX</li>
+</ul>
+</li>
+<li><p><code>$obj.appendTo(content)</code>将jQuery对象放在content的里面的尾部,content是css选择器字符串或者是</p>
+</li>
+<li><p><code>$obj.each(数组,function(index,n)&#123;&#125;);</code>遍历数组中每一个元素的函数,回调函数第一个参数是index第二个参数是值</p>
+</li>
+<li><p><code>$.trim(str)</code>取出str两边的空格(实际上原生JS的string就有这个功能)</p>
+</li>
+</ul>
+<h2 id="jQuery对象的使用"><a href="#jQuery对象的使用" class="headerlink" title="jQuery对象的使用"></a>jQuery对象的使用</h2><ul>
+<li>jQuery的核心函数返回的是对象</li>
+<li>jQuery的对象内部是一个包含DOM元素对象的伪数组(即使可能只有一个元素)</li>
+<li>jQuery对象拥有很多的属性和方法,让程序员可以更方便的操作DOM</li>
+</ul>
+<p>jQuery对象的基本行为:</p>
+<ul>
+<li>size()/length 返回的是DOM元素的数目(在jQuery1.8之后size方法已经被废弃)</li>
+<li>[index]/get(index) 根据下标得到对应的DOM元素,注意这里是位数组,所以调用的实际上是调用属性,但是数组不能作为变量的开头,所以使用了<code>[1]</code>获取元素,注意数组里面的元素是DOM,所以<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;B2=&quot;</span>+$(<span class="string">&quot;button&quot;</span>)[<span class="number">2</span>].innerHTML);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;B2=&quot;</span>+$($(<span class="string">&quot;button&quot;</span>)[<span class="number">2</span>]).html());</span><br></pre></td></tr></table></figure></li>
+<li>each() 遍历,与上面的一样,his就是被遍历到的某一个对象</li>
+<li>index() 获取某个元素是在同标签元素中的第几个,注意与<code>get(index)</code>的区别</li>
+</ul>
+<h2 id="jQuery选择器"><a href="#jQuery选择器" class="headerlink" title="jQuery选择器"></a>jQuery选择器</h2><p>选择器本身是一个字符串没有作用</p>
+<p>基本语法就是CSS选择器的规则</p>
+<p>只有调用<code>$(&quot;选择器&quot;)</code>才有作用,作用是在整个文档中查找所有匹配的标签封装成jQuery对象(伪数组)</p>
+<p>选择器</p>
+<ul>
+<li><code>$(&quot;#div1&quot;)</code> id选择器</li>
+<li><code>$(&quot;div&quot;)</code> 元素选择器</li>
+<li><code>$(&quot;.box&quot;)</code> 类选择器 </li>
+<li><code>$(&quot;div,span&quot;)</code>并集选择器</li>
+<li><code>$(&quot;div.box&quot;)</code>交集选择器</li>
+<li><code>$(&quot;*&quot;)</code> 任意标签</li>
+<li><code>$(&quot;ul span&quot;)</code> ul下的所有span</li>
+<li><code>$(&quot;ul&gt;span&quot;)</code> ul下的子元素span</li>
+<li><code>$(&quot;.box+li&quot;)</code> .box下面的一个li</li>
+<li><code>$(&quot;.box~li&quot;)</code> .box后面的所有兄弟li</li>
+<li><code>$(&quot;.box:first&quot;)</code> 选择第一个class为box的元素</li>
+<li><code>$(&quot;.box:last&quot;)</code> 选择第一个class为box的元素</li>
+<li><code>$(&quot;div:not(.box)&quot;)</code> 选择class不是box的div</li>
+<li><code>$(&quot;li:eq(2)&quot;)</code> li中第二个元素(0开始)</li>
+<li><code>$(&quot;li:gt(0):lt(3)&quot;)</code>所有li中<strong>下标大于0的元素里面下标小于3</strong>的元素注意是链式调用,不是同时执行</li>
+<li><code>$(&quot;li:contains(&#39;XXX&#39;)&quot;)</code>内容包含XXX的li,注意切换<code>&#39;</code>,<code>&quot;</code></li>
+<li><code>$(&quot;li:hidden&quot;)</code> 隐藏了li</li>
+<li><code>$(&quot;li:visible&quot;)</code> 可见的li</li>
+<li><code>$(&quot;li[id]&quot;)</code> 有id属性的li</li>
+<li><code>$(&quot;li[id=&quot;hello&quot;]&quot;)</code> id属性为hello的li</li>
+<li><code>$(&quot;li:odd&quot;)</code> 下标为奇数的选择器</li>
+<li><code>$(&quot;li:even&quot;)</code> 下标为偶数的选择器</li>
+<li><code>$(&quot;:input:disabled&quot;)</code> 不可选中的input</li>
+<li><code>$(&quot;:checkbox:checked&quot;)</code>选择已经选中的checkbox</li>
+</ul>
+<p>注意<code>&lt;select&gt;</code>的val是val元素</p>
+<p>方法</p>
+<ul>
+<li><code>.css(&quot;属性名&quot;,[&quot;值&quot;])</code>也可以封装成对象<code>.css(&#123;&#39;color&#39;:&#39;#bfa&#39;,&#39;color&#39;:&#39;#bfa&#39;,&#39;color&#39;:&#39;#bfa&#39;&#125;)</code></li>
+</ul>
+<h2 id="工具的方法"><a href="#工具的方法" class="headerlink" title="$工具的方法"></a><code>$</code>工具的方法</h2><ul>
+<li><code>$.each(obj,function(i,n)&#123;&#125;)</code> 遍历数组/对象中的对象<ul>
+<li>调用对象为数组的时候两个参数为index value</li>
+<li>调用对象为对象的时候两个参数为属性名 属性值</li>
+</ul>
+</li>
+<li><code>$.trim()</code></li>
+<li><code>$.type(obj)</code> 返回boj的类型</li>
+<li><code>$.isArray(X)</code> 判断X是不是数组</li>
+<li><code>$.parseJSON(json)</code>json转js对象</li>
+</ul>
+<h2 id="多Tab点击切换"><a href="#多Tab点击切换" class="headerlink" title="多Tab点击切换"></a>多Tab点击切换</h2><ul>
+<li>隐式遍历<br><code>$(&quot;div&quot;).click(function()&#123;&#125;)</code>相当于为所有选中元素添加</li>
+</ul>
+<p>可以对比一下用不用隐式的区别</p>
+<p>没有</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        ul&#123;</span><br><span class="line">            overflow: auto;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line">        ul&gt;li&#123;</span><br><span class="line">            display: block;</span><br><span class="line">            width: 100px;</span><br><span class="line">            height: 75px;</span><br><span class="line">            float: left;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.page</span>&#123;</span></span><br><span class="line">            width: 300px;</span><br><span class="line">            height: 200px;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>#bfa<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>#F00<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>#e3e3e3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;page&quot;</span>&gt;</span>1111111111111111111111<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;page&quot;</span>&gt;</span>2222222222222222222222<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;page&quot;</span>&gt;</span>3333333333333333333333<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/jquery-3.5.1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> index=<span class="number">0</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> bts=$(<span class="string">&quot;ul&gt;li&quot;</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> pgs=$(<span class="string">&quot;div[class=page]&quot;</span>);</span></span><br><span class="line"><span class="javascript">        $.each(bts,<span class="function"><span class="keyword">function</span>(<span class="params">i,elem</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            $(elem).css(<span class="string">&quot;background-color&quot;</span>,$(<span class="built_in">this</span>).html());</span></span><br><span class="line"><span class="javascript">            $(pgs[i]).css(<span class="string">&quot;background-color&quot;</span>,$(<span class="built_in">this</span>).html());</span></span><br><span class="line"><span class="javascript">            $(bts[i]).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line">                index=i;</span><br><span class="line"><span class="javascript">                $.each(pgs,<span class="function"><span class="keyword">function</span>(<span class="params">i,elem</span>)</span>&#123;</span></span><br><span class="line">                    if(i===index)</span><br><span class="line"><span class="javascript">                        $(pgs[i]).css(<span class="string">&quot;display&quot;</span>,<span class="string">&quot;block&quot;</span>);</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">else</span></span></span><br><span class="line"><span class="javascript">                        $(pgs[i]).css(<span class="string">&quot;display&quot;</span>,<span class="string">&quot;none&quot;</span>);</span></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line"><span class="javascript">            $(bts[<span class="number">0</span>]).click();</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>隐式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        ul&#123;</span><br><span class="line">            overflow: auto;</span><br><span class="line">            margin: 0;</span><br><span class="line">            padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line">        ul&gt;li&#123;</span><br><span class="line">            display: block;</span><br><span class="line">            width: 100px;</span><br><span class="line">            height: 75px;</span><br><span class="line">            float: left;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.page</span>&#123;</span></span><br><span class="line">            width: 300px;</span><br><span class="line">            height: 200px;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>#bfa<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>#F00<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>#e3e3e3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;page&quot;</span>&gt;</span>1111111111111111111111<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;page&quot;</span>&gt;</span>2222222222222222222222<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;page&quot;</span>&gt;</span>3333333333333333333333<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/jquery-3.5.1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> index=<span class="number">0</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> bts=$(<span class="string">&quot;ul&gt;li&quot;</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> pgs=$(<span class="string">&quot;div[class=page]&quot;</span>);</span></span><br><span class="line"><span class="javascript">        $.each(bts,<span class="function"><span class="keyword">function</span>(<span class="params">i,n</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="built_in">this</span>).css(<span class="string">&quot;background-color&quot;</span>,$(<span class="built_in">this</span>).html());</span></span><br><span class="line"><span class="javascript">            $(pgs[i]).css(<span class="string">&quot;background-color&quot;</span>,$(<span class="built_in">this</span>).html());</span></span><br><span class="line">        &#125;)</span><br><span class="line"><span class="javascript">        bts.click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> idx=$(<span class="built_in">this</span>).index();</span></span><br><span class="line"><span class="javascript">            $(<span class="built_in">this</span>).css(<span class="string">&quot;background-color&quot;</span>,$(<span class="built_in">this</span>).html());</span></span><br><span class="line"><span class="javascript">            $(pgs[idx]).css(<span class="string">&quot;background-color&quot;</span>,$(<span class="built_in">this</span>).html());</span></span><br><span class="line"><span class="javascript">            pgs.css(<span class="string">&quot;display&quot;</span>,<span class="string">&quot;none&quot;</span>);</span></span><br><span class="line"><span class="javascript">            $(pgs[idx]).css(<span class="string">&quot;display&quot;</span>,<span class="string">&quot;block&quot;</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line"><span class="javascript">        $(bts[<span class="number">0</span>]).click();</span></span><br><span class="line">    &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意,可以使用DOM原生的方法不用jQuery,因为效率会下来,例如<code>$(btn).css(&quot;color&quot;,&quot;red&quot;)</code>不如<code>btn.style.color=red</code></p>
+<h2 id="jQuery属性"><a href="#jQuery属性" class="headerlink" title="jQuery属性"></a>jQuery属性</h2><ul>
+<li><code>$(&quot;div:first&quot;).attr(&quot;title&quot;)</code> 获取第一个div的title属性值,attr:获取属性值</li>
+<li><code>$(&quot;div:first&quot;).attr(&quot;title&quot;,&quot;hahaha&quot;)</code> 设置第一个div的title属性值为hahaha</li>
+<li><code>$(&quot;div:first&quot;).removeattr(&quot;title&quot;)</code> 删除第一个div的title属性</li>
+<li><code>$(&quot;div:first&quot;).attr(&quot;class&quot;,&quot;XXX&quot;)</code> 设置class属性为XXX,如果有就直接覆盖</li>
+<li><code>$(&quot;div:first&quot;).addClass(&quot;abc&quot;)</code> 为元素添加abc这个类</li>
+<li><code>$(&quot;div:first&quot;).removeClass(&quot;abc&quot;)</code> 为元素添加abc这个类</li>
+<li><code>$(&quot;div:first&quot;).html()</code> 获取元素的innerHTML</li>
+<li><code>$(&quot;div:first&quot;).html(&quot;XXX&quot;)</code> 设置元素的innerHTML为XXX</li>
+<li><code>$(&quot;div:first&quot;).text()</code> 获取元素的innerText(兼容性不好)</li>
+<li><code>$(&quot;button:first&quot;).attr(&quot;checked&quot;,true)</code> 设置选中为true</li>
+<li><code>$(&quot;button:first&quot;).prop(&quot;checked&quot;,true)</code> 设置选中为true</li>
+</ul>
+<p>注意在HTML的表单的时候check的<code>checked=checked</code>但是在JS里面写<code>checked=true</code></p>
+<p><code>prop</code>仅仅操作属性为bool的元素,<code>attr</code>仅仅操作属性为非bool的属性</p>
+<p>我们可以使用attr修改css的class这样不用使用css()修改元素的样式,这样提高了效率</p>
+<p>更详细的</p>
+<ul>
+<li>对于 HTML 元素本身就带有的固有属性，或者说 W3C 标准里就包含有这些属性，更直观的说法就是，编辑器里面可以智能提示出来的一些属性，如：src、href、value、class、name、id等。在处理时，使用 prop() 方法。(还有bool的)</li>
+<li>对于 HTML 元素我们自定义的 DOM 属性，即元素本身是没有这个属性的，如：data-*。在处理时，使用 attr() 方法。</li>
+</ul>
+<h2 id="CSS模块"><a href="#CSS模块" class="headerlink" title="CSS模块"></a>CSS模块</h2><p>操作的是style属性</p>
+<ul>
+<li><code>$obj.css(&quot;color&quot;)</code>obj这个元素的color属性</li>
+<li><code>$obj.css(&quot;color&quot;,&quot;red&quot;)</code>设置obj这个元素的color属性为red</li>
+<li>css方法不必驼峰，例如<code>$(&quot;#1&quot;).css(&quot;border-width&quot;)</code></li>
+<li>设置obj这个元素的color属性为red,width为150,height为200<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$obj.css(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    color:<span class="string">&quot;#bfa&quot;</span>,</span><br><span class="line">    height:<span class="string">&quot;200px&quot;</span>,</span><br><span class="line">    width: <span class="number">100</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+注意,这里的px可以不加</li>
+</ul>
+<h2 id="CSS位置模块"><a href="#CSS位置模块" class="headerlink" title="CSS位置模块"></a>CSS位置模块</h2><ul>
+<li>获取元素相对于页面左上角的距离<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ost=$obj.offset();</span><br><span class="line"><span class="built_in">console</span>.log(ost.left,ost.top)</span><br></pre></td></tr></table></figure></li>
+<li>获取元素相对与父元素的距离<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> position=$obj.position();</span><br><span class="line"><span class="built_in">console</span>.log(position.left,position.top)</span><br></pre></td></tr></table></figure></li>
+<li>offset是读写合一的,修改<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$obj.offset(&#123;</span><br><span class="line">    left:<span class="number">50</span>,</span><br><span class="line">    top:<span class="number">20</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li>滚动高度:<code>$Obj.scroolTop()</code>获取滚动条高度,同时是<strong>读写合一的的函数</strong>,但是全局的滚动条高度存在兼容性问题,IE是document,Chrome是html,兼容方法是<code>document.scroolTop()+html.scroolTop()</code>,最好用这个<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log($(<span class="built_in">document</span>.documentElement())+$(<span class="built_in">document</span>.body).scrollTop())</span><br></pre></td></tr></table></figure>
+效率高一点点,设置滚动兼容性<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;html,body&#x27;</span>).scrollTop(<span class="number">300</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="实现滚动"><a href="#实现滚动" class="headerlink" title="实现滚动"></a>实现滚动</h2><p>直接滚动</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        html,body&#123;</span><br><span class="line"><span class="css">            <span class="selector-tag">background-color</span>: <span class="selector-id">#3e3e3e</span>;</span></span><br><span class="line">            height: 100000px;</span><br><span class="line">        &#125;</span><br><span class="line">        div&#123;</span><br><span class="line">            position: fixed;</span><br><span class="line">            right: 100px;</span><br><span class="line">            bottom: 100px;</span><br><span class="line">            width: 50px;</span><br><span class="line">            height: 50px;</span><br><span class="line"><span class="css">            <span class="selector-tag">background-color</span>: <span class="selector-id">#bfa</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;back&quot;</span>&gt;</span>回到顶部<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/jquery-3.5.1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&quot;div&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">&quot;body,html&quot;</span>).scrollTop(<span class="number">0</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>平滑滚动</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>*</span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        html,body&#123;</span><br><span class="line"><span class="css">            <span class="selector-tag">background-color</span>: <span class="selector-id">#3d3d3d</span>;</span></span><br><span class="line">            height: 100000px;</span><br><span class="line">        &#125;</span><br><span class="line">        div&#123;</span><br><span class="line">            position: fixed;</span><br><span class="line">            right: 100px;</span><br><span class="line">            bottom: 100px;</span><br><span class="line">            width: 50px;</span><br><span class="line">            height: 50px;</span><br><span class="line"><span class="css">            <span class="selector-tag">background-color</span>: <span class="selector-id">#bfa</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>Back<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/jquery-3.5.1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> backtot=$($(<span class="string">&quot;div&quot;</span>)[<span class="number">0</span>]);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(backtot);</span></span><br><span class="line"><span class="javascript">        backtot.click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> dis=$(<span class="string">&quot;body,html&quot;</span>).scrollTop();</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> per=dis/<span class="number">100</span>;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> inter=<span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>($(<span class="string">&quot;body,html&quot;</span>).scrollTop()&lt;=per)&#123;</span></span><br><span class="line"><span class="javascript">                    $(<span class="string">&quot;body,html&quot;</span>).scrollTop(<span class="number">0</span>);</span></span><br><span class="line"><span class="javascript">                    <span class="built_in">clearInterval</span>(inter);</span></span><br><span class="line">                &#125;</span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log($(<span class="string">&quot;body,html&quot;</span>).scrollTop());</span></span><br><span class="line"><span class="javascript">                $(<span class="string">&quot;body,html&quot;</span>).scrollTop($(<span class="string">&quot;body,html&quot;</span>).scrollTop()-per);</span></span><br><span class="line">            &#125;,2);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="元素的尺寸"><a href="#元素的尺寸" class="headerlink" title="元素的尺寸"></a>元素的尺寸</h2><ul>
+<li>内容尺寸<ul>
+<li>height(): height</li>
+<li>width(): width</li>
+</ul>
+</li>
+<li>内部尺寸<ul>
+<li>innerHeight: height+padding</li>
+<li>innerwidth: width+padding</li>
+</ul>
+</li>
+<li>外部尺寸<ul>
+<li>outerHeight(false/true): height+padding+border+参数*margin</li>
+<li>outerWidth(false/true): width+padding+border+参数*margin</li>
+</ul>
+</li>
+</ul>
+<h2 id="对象的筛选"><a href="#对象的筛选" class="headerlink" title="对象的筛选"></a>对象的筛选</h2><ul>
+<li><p>过滤: 对jQuery中的元素进行筛选</p>
+</li>
+<li><p>查找: 找元素里面的子孙</p>
+</li>
+<li><p>过滤的结果与原对象是存在关系的</p>
+</li>
+<li><p>查找的结果与源对象之间没有关系</p>
+</li>
+</ul>
+<p>感觉上和CSS选择器类似</p>
+<ul>
+<li>过滤<ul>
+<li>在jQuery对象内部的元素中找出部分匹配的元素, 并封装成新的jQuery对象返回</li>
+<li>first()</li>
+<li>last()</li>
+<li>eq(index)</li>
+<li>filter(selector): 对当前元素提要求</li>
+<li>not(selector): 对当前元素提要求, 并取反</li>
+<li>has(selector): 对子孙元素提要求</li>
+</ul>
+</li>
+<li>查找<ul>
+<li>查找jQuery对象内部的元素的子孙/兄弟/父母元素, 并封装成新的jQuery对象返回</li>
+<li>children(selector): 子元素</li>
+<li>find(selector): 后代元素</li>
+<li>preAll(selector): 前的所有兄弟</li>
+<li>siblings(selector): 所有兄弟</li>
+<li>parent(): 父元素</li>
+</ul>
+</li>
+</ul>
+<h2 id="jQuery的文档处理"><a href="#jQuery的文档处理" class="headerlink" title="jQuery的文档处理"></a>jQuery的文档处理</h2><ul>
+<li>在元素内部插入<ul>
+<li><code>$被插入元素.append(&quot;HTML代码&quot;)</code> 插入到被插入元素的尾部</li>
+<li><code>要添加的HTML代码的jQuery对象.appendTo(&quot;被插入元素选择器/$obj&quot;)</code> 插入到被插入元素的尾部</li>
+<li><code>$被插入元素.prepend(&quot;HTML代码&quot;)</code> 插入到被插入元素的首部</li>
+<li><code>要添加的HTML代码的jQuery对象.prependTo(&quot;被插入元素选择器/$obj&quot;)</code> 插入到被插入元素的首 部</li>
+</ul>
+</li>
+<li>在元素外部(同级)插入<ul>
+<li><code>$被参考元素.before(&quot;HTML代码&quot;)</code> 在被参考元素前面插入 </li>
+<li><code>$被参考元素.after(&quot;HTML代码&quot;)</code> 在被参考元素后面面插入</li>
+</ul>
+</li>
+<li>替换 <ul>
+<li><code>$被替换元素.replaceWith(&quot;HTML代码&quot;)</code> 用HTML代码替换被替换元素</li>
+<li><code>$被替换元素.replaceAll(&quot;CSS选择器&quot;)</code>用选择器选中的元素替换$obj</li>
+</ul>
+</li>
+<li>删除<ul>
+<li><code>$obj.empty()</code> 清空obj里面的元素</li>
+<li><code>$obj.remove()</code> 清空obj以及他的子元素</li>
+</ul>
+</li>
+</ul>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><ul>
+<li>页面载入:ready(function(){})就是$(function(){})的缩写</li>
+</ul>
+<p><strong>事件的绑定与解邦</strong></p>
+<ul>
+<li><p>点击函数</p>
+<ul>
+<li><code>$obj.click(function()&#123;&#125;)</code></li>
+<li><code>$obj.on(&quot;click&quot;,function()&#123;&#125;)</code></li>
+<li>第一个简洁第二个通用(对于没有绑定事件的方法)</li>
+</ul>
+</li>
+<li><p>鼠标移出入</p>
+<ul>
+<li><code>$obj.mouseenter(function()&#123;&#125;);&amp;</code>$obj.mouseleave(function(){});`</li>
+<li><code>$obj.on(&quot;mouseenter&quot;,function()&#123;&#125;);&amp;</code>$obj.on(“mouselive”,function(){});`</li>
+<li><code>$obj.hover(function()&#123;&#125;,function()&#123;&#125;)</code> 先写入后写出</li>
+</ul>
+</li>
+<li><p>解除某个元素的所有监听</p>
+<ul>
+<li><code>$obj.off()</code></li>
+</ul>
+</li>
+<li><p>解除某个元素的指定监听</p>
+<ul>
+<li><code>$obj.off(&quot;监听名&quot;)</code></li>
+</ul>
+</li>
+<li><p>事件坐标</p>
+<ul>
+<li>在click等事件内部想获得触发事件元素的坐标可以在回调函数上加入event</li>
+<li>元素距离视口左上角坐标:<code>event.clientX</code>,<code>event.clientY</code></li>
+<li>元素距离页面左上角坐标:<code>event.pageX</code>,<code>event.pageY</code></li>
+<li>事件元素左上角坐标:<code>event.offsetX</code>,<code>event.offsetY</code></li>
+</ul>
+</li>
+<li><p>取消事件冒泡</p>
+<ul>
+<li><code>event.stopPropagation()</code>取消事件的冒泡行为(指的是冒泡给父元素)</li>
+<li><code>event.preventDefuat()</code>取消默认行为 </li>
+</ul>
+</li>
+</ul>
+<p><strong>事件的委托</strong></p>
+<ul>
+<li>在append元素之后新的元素不会绑定原有的事件,可以在创建的时候再次绑定,也可以使用事件的委托</li>
+<li>事件的委托就是将子元素的事件代为父元素处理,用event.target获得子元素 </li>
+<li>添加事件委托<code>$受委托.delegate(&quot;委托元素选择器&quot;,&quot;委托事件&quot;,回调函数function()&#123;&#125;)</code></li>
+<li>移除事件委托<code>$受委托.undelegate([&quot;委托元素选择器&quot;],[&quot;委托事件&quot;],[回调函数function()&#123;&#125;])</code>不写就是对应项目的全部</li>
+</ul>
+<h2 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./css/style.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/jquery-3.5.1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/script.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outer&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;imgs&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./img/imgs3.jpg&quot;</span> <span class="attr">class</span>=<span class="string">&quot;innerimg&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./img/imgs0.jpg&quot;</span> <span class="attr">class</span>=<span class="string">&quot;innerimg&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./img/imgs1.jpg&quot;</span> <span class="attr">class</span>=<span class="string">&quot;innerimg&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./img/imgs2.jpg&quot;</span> <span class="attr">class</span>=<span class="string">&quot;innerimg&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./img/imgs3.jpg&quot;</span> <span class="attr">class</span>=<span class="string">&quot;innerimg&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./img/imgs0.jpg&quot;</span> <span class="attr">class</span>=<span class="string">&quot;innerimg&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;nodes&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn lst&quot;</span>&gt;</span><span class="symbol">&amp;lt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn nxt&quot;</span>&gt;</span><span class="symbol">&amp;gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>,<span class="selector-tag">html</span>&#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#bfa</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.outer</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">100px</span> auto;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="selector-class">.imgs</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">99999px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="selector-tag">img</span>&#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">            <span class="attribute">float</span>: left;</span><br><span class="line">            <span class="attribute">text-align</span>: top;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.nodes</span>&#123;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">transform</span>: translateX(-<span class="number">50%</span>);</span><br><span class="line">        <span class="attribute">background-color</span>: <span class="number">#000</span>;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">15px</span>;</span><br><span class="line">        <span class="attribute">bottom</span>: <span class="number">50px</span>;</span><br><span class="line">        <span class="attribute">text-align</span>: center;</span><br><span class="line">        <span class="selector-tag">a</span>&#123;</span><br><span class="line">            <span class="attribute">background-clip</span>: content-box;</span><br><span class="line">            <span class="attribute">display</span>: block;</span><br><span class="line">            <span class="attribute">float</span>: left;</span><br><span class="line">            <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">            <span class="attribute">background-color</span>: rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,.<span class="number">4</span>);</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">8px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">8px</span>;</span><br><span class="line">            <span class="attribute">border</span>: <span class="number">1px</span> rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,.<span class="number">4</span>) solid;</span><br><span class="line">            <span class="attribute">margin</span>: <span class="number">3px</span> <span class="number">4px</span> <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">text-align</span>: center;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.active</span>&#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">9px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">9px</span>;</span><br><span class="line">            <span class="attribute">margin-top</span>: <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">            <span class="attribute">border</span>: <span class="number">3px</span> rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,.<span class="number">4</span>) solid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="attribute">a</span>:hover&#123;</span><br><span class="line">            .active</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.btn</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,.<span class="number">4</span>);</span><br><span class="line">        <span class="attribute">text-decoration</span>: none;</span><br><span class="line">        <span class="attribute">display</span>: block;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">        <span class="attribute">transform</span>: translateY(-<span class="number">50%</span>);</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">15px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>);</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">        <span class="attribute">text-align</span>: center;</span><br><span class="line">        <span class="attribute">line-height</span>: <span class="number">30px</span>;</span><br><span class="line">        <span class="attribute">font-weight</span>: <span class="number">1000</span>;</span><br><span class="line">        <span class="selector-tag">&amp;</span><span class="selector-class">.lst</span>&#123;</span><br><span class="line">            <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">15px</span> <span class="number">15px</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-tag">&amp;</span><span class="selector-class">.nxt</span>&#123;</span><br><span class="line">            <span class="attribute">right</span>: <span class="number">0px</span>;</span><br><span class="line">            <span class="attribute">border-radius</span>: <span class="number">15px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">15px</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// ====== consts ======</span></span><br><span class="line">    <span class="keyword">var</span> PIC_WIDTH=<span class="number">400</span>;</span><br><span class="line">    <span class="keyword">var</span> DOT_SZIE=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">var</span> DOT_ACTIVE_SIZE=<span class="number">15</span>;</span><br><span class="line">    <span class="keyword">var</span> DOT_MARGE=<span class="number">4</span>;</span><br><span class="line">    <span class="keyword">var</span> PIC_Time=<span class="number">500</span>;</span><br><span class="line">    <span class="keyword">var</span> PIC_Intr=<span class="number">2000</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ====== jQuery Object ======</span></span><br><span class="line">    <span class="keyword">var</span> $dot;</span><br><span class="line">    <span class="keyword">var</span> $dotOut=$(<span class="string">&quot;.nodes&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> $btns=$(<span class="string">&quot;.btn&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> $imgOut=$(<span class="string">&quot;.imgs&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> $imgs=$(<span class="string">&quot;img&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ====== variable ======</span></span><br><span class="line">    <span class="keyword">var</span> index=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> pics=$imgs.length-<span class="number">2</span></span><br><span class="line">    <span class="keyword">var</span> curGlbInt=-<span class="number">1</span>,curPssInt=-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ====== resize ======</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;pics;i++)</span><br><span class="line">        $dotOut.append(<span class="string">&#x27;&lt;a class=&quot;node&quot; id=&quot;&#x27;</span>+i+<span class="string">&#x27;dotBtn&quot;&gt;&lt;/a&gt;&#x27;</span>);</span><br><span class="line">    $dot=$(<span class="string">&quot;.node&quot;</span>);</span><br><span class="line">    $dotOut.css(<span class="string">&quot;width&quot;</span>,DOT_SZIE*$dot.length+DOT_MARGE*($dot.length)+<span class="number">2</span>*(DOT_ACTIVE_SIZE-DOT_SZIE));</span><br><span class="line">    $imgOut.css(<span class="string">&quot;width&quot;</span>,$imgs.length*PIC_WIDTH);</span><br><span class="line">    $imgOut.css(<span class="string">&quot;left&quot;</span>,-PIC_WIDTH);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ====== base fn ======</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">pause</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curGlbInt+<span class="number">1</span>)<span class="built_in">clearInterval</span>(curGlbInt);curGlbInt=-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(curPssInt+<span class="number">1</span>)<span class="built_in">clearInterval</span>(curPssInt);curPssInt=-<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">runPage</span>(<span class="params"><span class="built_in">global</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curPssInt+<span class="number">1</span>)<span class="keyword">return</span>;</span><br><span class="line">        $dot.removeClass(<span class="string">&quot;active&quot;</span>)</span><br><span class="line">        $($dot[<span class="built_in">global</span>%pics]).addClass(<span class="string">&quot;active&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> L0=$imgOut.position().left;</span><br><span class="line">        <span class="keyword">var</span> L1=-(<span class="built_in">global</span>+<span class="number">1</span>)*PIC_WIDTH;</span><br><span class="line">        <span class="keyword">var</span> speed=(L1-L0)/(PIC_Time/(<span class="number">1000</span>/<span class="number">12</span>));</span><br><span class="line">        curPssInt=<span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(($imgOut.position().left-L1)*($imgOut.position().left-L1+speed)&lt;=<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(curPssInt+<span class="number">1</span>)<span class="built_in">clearInterval</span>(curPssInt);</span><br><span class="line">                curPssInt=-<span class="number">1</span>;</span><br><span class="line">                $imgOut.css(<span class="string">&quot;left&quot;</span>,L1);</span><br><span class="line">                <span class="keyword">if</span>(L1==-<span class="number">5</span>*PIC_WIDTH)$imgOut.css(<span class="string">&quot;left&quot;</span>,-PIC_WIDTH);</span><br><span class="line">                <span class="keyword">if</span>(L1==<span class="number">0</span>)$imgOut.css(<span class="string">&quot;left&quot;</span>,-<span class="number">4</span>*PIC_WIDTH);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                $imgOut.css(<span class="string">&quot;left&quot;</span>,$imgOut.position().left+speed);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="number">1000</span>/<span class="number">12</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">glbRun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        curGlbInt=<span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            index=index%pics+<span class="number">1</span>;</span><br><span class="line">            runPage(index);</span><br><span class="line">        &#125;,PIC_Intr);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">clickRun</span>(<span class="params">step</span>)</span>&#123;</span><br><span class="line">        index=index%pics+step</span><br><span class="line">        runPage(index)</span><br><span class="line">        <span class="keyword">if</span>(index&lt;<span class="number">0</span>)index=pics-<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $($btns[<span class="number">0</span>]).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curPssInt+<span class="number">1</span>)<span class="keyword">return</span>;</span><br><span class="line">        pause();</span><br><span class="line">        clickRun(-<span class="number">1</span>);</span><br><span class="line">        glbRun();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    $($btns[<span class="number">1</span>]).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curPssInt+<span class="number">1</span>)<span class="keyword">return</span>;</span><br><span class="line">        pause();</span><br><span class="line">        clickRun(<span class="number">1</span>);</span><br><span class="line">        glbRun();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    $imgOut.hover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curGlbInt+<span class="number">1</span>)<span class="built_in">clearInterval</span>(curGlbInt);curGlbInt=-<span class="number">1</span>;</span><br><span class="line">    &#125;,glbRun);</span><br><span class="line"></span><br><span class="line">    $dot.mouseenter(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curGlbInt+<span class="number">1</span>)<span class="built_in">clearInterval</span>(curGlbInt);curGlbInt=-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(curPssInt+<span class="number">1</span>)<span class="built_in">clearInterval</span>(curPssInt);curPssInt=-<span class="number">1</span>;</span><br><span class="line">        index=<span class="built_in">parseInt</span>($(<span class="built_in">this</span>).index());</span><br><span class="line">        runPage(index);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    glbRun();</span><br><span class="line">    $($dot[<span class="number">0</span>]).addClass(<span class="string">&quot;active&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><ul>
+<li><p>淡入淡出</p>
+<ul>
+<li><code>$obj.fadeOut()</code> 本质上是修改了元素的透明度实现淡出</li>
+<li><code>$obj.fadeOut([&quot;slow&quot;/&quot;normal&quot;/&quot;fase&quot;/ms数值])</code> 本质上是修改了元素的透明度实现淡出,加入了执行时间</li>
+<li><code>$obj.fadeOut()</code>淡入,同上</li>
+<li><code>$obj.fadeToggle()</code>切换淡出淡入</li>
+<li>可以在上面函数中加入一个回调函数,会在动画执行结束后运行<code>$obj.fadeOut(1000,function()&#123;&#125;)</code></li>
+</ul>
+</li>
+<li><p>滑动</p>
+<ul>
+<li>滑动动画: 不断改变元素的高度实现</li>
+<li>slideDown(): 带动画的展开</li>
+<li>slideUp(): 带动画的收slideToggle(): 带动画的切换展开/收缩</li>
+</ul>
+</li>
+<li><p>显示隐藏，默认没有动画, 动画(opacity/height/width)</p>
+<ul>
+<li>show(): (不)带动画的显示</li>
+<li>hide(): (不)带动画的隐藏</li>
+<li>toggle(): (不)带动画的切换显示/隐藏</li>
+</ul>
+</li>
+<li><p>自定义动画</p>
+<ul>
+<li><code>$obj.animate(&#123;css样式对象&#125;,执行时间)</code>同时将多个动画完成</li>
+<li><code>$obj.animate(&#123;css样式对象1&#125;).animate(&#123;CSS对象样式2&#125;)...</code>一步步执行</li>
+<li>好用的东西,移动指定的增量<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$obj.animate(&#123;</span><br><span class="line">    left: <span class="string">&quot;+=100&quot;</span>,<span class="number">2</span></span><br><span class="line">    top:  <span class="string">&quot;-=50&quot;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="多库共存"><a href="#多库共存" class="headerlink" title="多库共存"></a>多库共存</h2><ul>
+<li>如果引用的两个库同时调用了<code>$</code>属性那么会发生冲突</li>
+<li>这个时候我们希望jQuery会自动放弃<code>$</code>的使用权,开发者只可以使用jQuery函数</li>
+<li>只需要在jQuery正式使用前调用<code>jQuery.noConflict();</code></li>
+</ul>
+<h2 id="fun-与window-onload-function-的区别"><a href="#fun-与window-onload-function-的区别" class="headerlink" title="$(fun(){})与window.onload=function(){}的区别"></a><code>$(fun()&#123;&#125;)</code>与<code>window.onload=function()&#123;&#125;</code>的区别</h2><p>有三种方法定义加载完成函数</p>
+<ul>
+<li><code>window.onload=function()&#123;&#125;</code></li>
+<li><code>$obj.on(&quot;load&quot;,function()&#123;&#125;)</code></li>
+<li><code>$(function()&#123;&#125;)</code></li>
+<li><code>$(document).ready(function()&#123;&#125;)</code></li>
+</ul>
+<p>其中</p>
+<ul>
+<li>第三个和第四个函数是等价的</li>
+<li>第一个是文档加载完成的回调函数</li>
+<li>第二个是元素加载完成之后的回调函数</li>
+<li>第一个是在文档加载结束(图片视频等加载结束之后)</li>
+<li>第二个是在选中资源(图像等)完全加载结束回调</li>
+<li>第三四是在文档加载完成,不管图像怎么样,相当于文档解析完成执行</li>
+<li>jQuery的多个函数可以同时绑定到一个元素,但是window.onload不可以,存在覆盖,只能使用append添加</li>
+</ul>
+<h2 id="jQuery插件"><a href="#jQuery插件" class="headerlink" title="jQuery插件"></a>jQuery插件</h2><ul>
+<li><code>jQuery.fn.extend([fun1:function()&#123;&#125;,fun2:function()&#123;&#125;,...])</code>他可以扩展jQuery对象的方法,调用之后我们可以使用<code>$obj.fun1()</code></li>
+<li><code>jQuery.extend([fun1:function()&#123;&#125;,fun2:function()&#123;&#125;,...])</code>他可以扩展jQuery函数的方法,调用之后我们可以使用<code>$.fun1()</code></li>
+</ul>
+<p>常见插件</p>
+<ul>
+<li>jQuery-validation:一个表单验证的插件</li>
+</ul>
+<p>可以实现浏览器端<strong>同步</strong>的简单表单验证,举例</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">&quot;myForm&quot;</span> <span class="attr">action</span>=<span class="string">&quot;xxx&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>用户名(必须的, 最小2位): <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">required</span> <span class="attr">minlength</span>=<span class="string">&quot;2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>密码(必须的, 6到8位): <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;pwd&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">required</span> <span class="attr">minlength</span>=<span class="string">&quot;6&quot;</span> <span class="attr">maxlength</span>=<span class="string">&quot;8&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>确认密码(与密码相同): <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;pwd2&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">equalTo</span>=<span class="string">&quot;#password&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行发现似乎前两个可以验证,但是第三个挂了,提示的样式感觉是chrome原生的提醒,没错,其实插件并没有允许,只不过chrome恰好有相同的命令所以是直接由浏览器接管的,想要使用插件还需要告诉插件那个表单需要进行验证,只需要自己在后面写下js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(<span class="string">&quot;#myForm&quot;</span>).validate();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>全部的方法有:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">required: &quot;This field is required.&quot;,</span><br><span class="line">remote: &quot;Please fix this field.&quot;,</span><br><span class="line">email: &quot;Please enter a valid email address.&quot;,</span><br><span class="line">url: &quot;Please enter a valid URL.&quot;,</span><br><span class="line">date: &quot;Please enter a valid date.&quot;,</span><br><span class="line">dateISO: &quot;Please enter a valid date ( ISO ).&quot;,</span><br><span class="line">number: &quot;Please enter a valid number.&quot;,</span><br><span class="line">digits: &quot;Please enter only digits.&quot;,</span><br><span class="line">equalTo: &quot;Please enter the same value again.&quot;,</span><br><span class="line">maxlength: $.validator.format( &quot;Please enter no more than &#123;0&#125; characters.&quot; ),</span><br><span class="line">minlength: $.validator.format( &quot;Please enter at least &#123;0&#125; characters.&quot; ),</span><br><span class="line">rangelength: $.validator.format( &quot;Please enter a value between &#123;0&#125; and &#123;1&#125; characters long.&quot; ),</span><br><span class="line">range: $.validator.format( &quot;Please enter a value between &#123;0&#125; and &#123;1&#125;.&quot; ),</span><br><span class="line">max: $.validator.format( &quot;Please enter a value less than or equal to &#123;0&#125;.&quot; ),</span><br><span class="line">min: $.validator.format( &quot;Please enter a value greater than or equal to &#123;0&#125;.&quot; ),</span><br><span class="line">step: $.validator.format( &quot;Please enter a multiple of &#123;0&#125;.&quot; )</span><br></pre></td></tr></table></figure>
+
+<p>之后我们需要进行中文化处理,修改刚刚的js代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(<span class="string">&quot;#myForm&quot;</span>).validate(&#123;</span><br><span class="line">        messages:&#123;</span><br><span class="line">            要修改标签的name:&#123;</span><br><span class="line">                标记的属性<span class="number">1</span>:<span class="string">&quot;提示信息1&quot;</span>, </span><br><span class="line">                标记的属性<span class="number">2</span>:<span class="string">&quot;提示信息2&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            pwd:&#123;</span><br><span class="line">                minlength: <span class="string">&quot;输入的是什么玩意(手动狗头)&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以修改提示信息的css样式(上面有class)</p>
+<ul>
+<li>jQuery UI</li>
+</ul>
+<p>是jquery的一个插件,在下载之后看demo.html的样式自取,注意</p>
+<ul>
+<li><p>需要引用的文件有</p>
+<ul>
+<li>在<code>&lt;head&gt;&lt;/head&gt;</code>里面写<code>&lt;link rel=&quot;stylesheet&quot; href=&quot;./js/UIforUse/jquery-ui.css&quot;&gt;</code></li>
+<li>在引入<code>jQuery</code>与<code>jquery-ui.js</code>两个js文件,jQuery优先,这是因为第二个库是依赖jQuery运行的,而不想less是后面的库要编译我们写的less文件</li>
+<li>只需要复制给出了html代码然后记得把对应的js粘贴上,实例<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./js/UIforUse/jquery-ui.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 1. 手风琴 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">&quot;demoHeaders&quot;</span>&gt;</span>Accordion<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;accordion&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>First<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Second<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>Phasellus mattis tincidunt nibh.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Third<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>Nam dui erat, auctor a, dignissim quis.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 2. 自动补全 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">&quot;demoHeaders&quot;</span>&gt;</span>Autocomplete<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;autocomplete&quot;</span> <span class="attr">title</span>=<span class="string">&quot;type <span class="symbol">&amp;quot;</span>a<span class="symbol">&amp;quot;</span>&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 3. 选项卡 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">&quot;demoHeaders&quot;</span>&gt;</span>Tabs<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;tabs&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#tabs-1&quot;</span>&gt;</span>First<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#tabs-2&quot;</span>&gt;</span>Second<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#tabs-3&quot;</span>&gt;</span>Third<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;tabs-1&quot;</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;tabs-2&quot;</span>&gt;</span>Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;tabs-3&quot;</span>&gt;</span>Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/jquery-3.5.1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./js/UIforUse/jquery-ui.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// for 1</span></span></span><br><span class="line"><span class="javascript">    $(<span class="string">&quot;#accordion&quot;</span>).accordion()</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// for2</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> availableTags = [</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;ActionScript&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;AppleScript&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Asp&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;BASIC&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;C&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;C++&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Clojure&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;COBOL&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;ColdFusion&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Erlang&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Fortran&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Groovy&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Haskell&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Java&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;JavaScript&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Lisp&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Perl&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;PHP&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Python&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Ruby&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Scala&quot;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&quot;Scheme&quot;</span></span></span><br><span class="line">    ];</span><br><span class="line"><span class="javascript">    $( <span class="string">&quot;#autocomplete&quot;</span> ).autocomplete(&#123;</span></span><br><span class="line">        source: availableTags</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// for 3</span></span></span><br><span class="line"><span class="javascript">    $( <span class="string">&quot;#tabs&quot;</span> ).tabs();    </span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>laydate</p>
+<ul>
+<li>目前已经更新,教程失效,直接看<a target="_blank" rel="noopener" href="https://www.layui.com/laydate/?alone">官方文档</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="京东商品页"><a href="#京东商品页" class="headerlink" title="京东商品页"></a>京东商品页</h2><p>除了js之外其他都是模板没动(引用了jquery和自定义js),笔记在js里面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;       <span class="comment">// 写的是js文件,所以最好封装起来</span></span><br><span class="line">    <span class="comment">// 鼠标移动</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">hoverShowItem</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">&#x27;[name=&quot;show_hide&quot;]&#x27;</span>).hover(</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="comment">// $(this).find(&quot;#&quot;+this.id+&quot;_items&quot;).css(&quot;display&quot;,&quot;block&quot;);</span></span><br><span class="line">                $(<span class="string">&quot;#&quot;</span>+<span class="built_in">this</span>.id+<span class="string">&quot;_items&quot;</span>).show();</span><br><span class="line">            &#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="comment">// $(this).find(&quot;#&quot;+this.id+&quot;_items&quot;).css(&quot;display&quot;,&quot;none&quot;);</span></span><br><span class="line">                $(<span class="string">&quot;#&quot;</span>+<span class="built_in">this</span>.id+<span class="string">&quot;_items&quot;</span>).hide();</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// subsubshow</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">subsubshow</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">&#x27;.cate_item&#x27;</span>).hover(</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="comment">// $(this).find(&quot;.sub_cate_box&quot;).show()</span></span><br><span class="line">                $(<span class="built_in">this</span>).children(<span class="string">&quot;:last&quot;</span>).show()</span><br><span class="line">            &#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="comment">// $(this).find(&quot;.sub_cate_box&quot;).hide()</span></span><br><span class="line">                $(<span class="built_in">this</span>).children(<span class="string">&quot;:last&quot;</span>).hide()</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">inputShow</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;#txtSearch&quot;</span>)</span><br><span class="line">            .on(<span class="string">&quot;keyup force&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>($(<span class="built_in">this</span>).val().trim)</span><br><span class="line">                    $(<span class="built_in">this</span>).parent().prevAll(<span class="string">&quot;#search_helper&quot;</span>).show();</span><br><span class="line">            &#125;)</span><br><span class="line">            .blur(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                $(<span class="built_in">this</span>).parent().prevAll(<span class="string">&quot;#search_helper&quot;</span>).hide();</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sharemore</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 注意数组顺序!!!</span></span><br><span class="line">        $(<span class="string">&quot;#shareMore&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>($(<span class="built_in">this</span>).prevAll(<span class="string">&quot;a&quot;</span>).filter(<span class="string">&quot;:first&quot;</span>).css(<span class="string">&quot;display&quot;</span>)==<span class="string">&quot;block&quot;</span>)&#123;</span><br><span class="line">                $(<span class="built_in">this</span>).prevAll(<span class="string">&quot;a&quot;</span>).filter(<span class="string">&quot;:lt(2)&quot;</span>).hide();</span><br><span class="line">                $(<span class="built_in">this</span>).parent().css(&#123;<span class="string">&quot;width&quot;</span>:<span class="string">&quot;-=&quot;</span>+<span class="built_in">parseInt</span>($(<span class="built_in">this</span>).css(<span class="string">&quot;width&quot;</span>))*<span class="number">2</span>&#125;);</span><br><span class="line">                $(<span class="built_in">this</span>).children(<span class="string">&quot;b&quot;</span>).css(<span class="string">&quot;backgroundPositionX&quot;</span>,<span class="string">&#x27;-271px&#x27;</span>)</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                $(<span class="built_in">this</span>).prevAll(<span class="string">&quot;a&quot;</span>).show();</span><br><span class="line">                $(<span class="built_in">this</span>).parent().css(&#123;<span class="string">&quot;width&quot;</span>:<span class="string">&quot;+=&quot;</span>+<span class="built_in">parseInt</span>($(<span class="built_in">this</span>).css(<span class="string">&quot;width&quot;</span>))*<span class="number">2</span>&#125;);</span><br><span class="line">                $(<span class="built_in">this</span>).children(<span class="string">&quot;b&quot;</span>).css(<span class="string">&quot;backgroundPositionX&quot;</span>,<span class="string">&#x27;-263px&#x27;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">selAddr</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> menus=$(<span class="string">&quot;#store_select&quot;</span>).children(<span class="string">&quot;.text&quot;</span>).nextAll();</span><br><span class="line">        $(<span class="string">&quot;#store_select&quot;</span>).hover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            menus.show();</span><br><span class="line">        &#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            menus.hide();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        $(<span class="string">&quot;#store_close&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>($(<span class="built_in">this</span>).css(<span class="string">&quot;display&quot;</span>)==<span class="string">&quot;block&quot;</span>)</span><br><span class="line">                menus.hide();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        $(<span class="string">&quot;#store_items&gt;li&gt;a&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            $(<span class="string">&quot;#store_tabs&gt;li&quot;</span>)[<span class="number">0</span>].innerHTML=$(<span class="built_in">this</span>).html()+<span class="string">&quot;&lt;b&gt;&lt;/b&gt;&quot;</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">chgPage</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;#product_detail&gt;ul&gt;li&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            $(<span class="built_in">this</span>).parent().children().removeClass(<span class="string">&quot;current&quot;</span>);</span><br><span class="line">            $(<span class="built_in">this</span>).addClass(<span class="string">&quot;current&quot;</span>);</span><br><span class="line">            $(<span class="built_in">this</span>).parent().nextAll(<span class="string">&quot;div:gt(0)&quot;</span>).hide();</span><br><span class="line">            $($(<span class="built_in">this</span>).parent().nextAll(<span class="string">&quot;div:gt(0)&quot;</span>)[$(<span class="built_in">this</span>).index()]).show();</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">minicar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;#minicart&gt;p&gt;a&quot;</span>).hover(</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                $(<span class="built_in">this</span>).parent().parent().children(<span class="string">&quot;div&quot;</span>).show()</span><br><span class="line">            &#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                $(<span class="built_in">this</span>).parent().parent().children(<span class="string">&quot;div&quot;</span>).hide()</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">prew</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> curPic=<span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="function"><span class="title">if</span>(<span class="params">curPic==<span class="number">0</span></span>)</span>&#123;</span><br><span class="line">                $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).filter(<span class="string">&quot;[class^=backward]&quot;</span>).addClass(<span class="string">&quot;backward_disabled&quot;</span>);</span><br><span class="line">                $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).filter(<span class="string">&quot;[class^=backward]&quot;</span>).removeClass(<span class="string">&quot;backward&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).filter(<span class="string">&quot;[class^=backward]&quot;</span>).addClass(<span class="string">&quot;backward&quot;</span>);</span><br><span class="line">                $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).filter(<span class="string">&quot;[class^=backward]&quot;</span>).removeClass(<span class="string">&quot;backward_disabled&quot;</span>);                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="function"><span class="title">if</span>(<span class="params">curPic==$(<span class="string">&quot;#icon_list&gt;li&quot;</span>).length-<span class="number">1</span></span>)</span>&#123;</span><br><span class="line">                $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).filter(<span class="string">&quot;[class^=forward]&quot;</span>).addClass(<span class="string">&quot;forward_disabled&quot;</span>);</span><br><span class="line">                $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).filter(<span class="string">&quot;[class^=forward]&quot;</span>).removeClass(<span class="string">&quot;forward&quot;</span>)</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).filter(<span class="string">&quot;[class^=forward]&quot;</span>).addClass(<span class="string">&quot;forward&quot;</span>);</span><br><span class="line">                $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).filter(<span class="string">&quot;[class^=forward]&quot;</span>).removeClass(<span class="string">&quot;forward_disabled&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $(<span class="string">&quot;#icon_list&gt;li&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            $(<span class="built_in">this</span>).parent().find(<span class="string">&quot;li&gt;img&quot;</span>).css(&#123;</span><br><span class="line">                border:<span class="string">&quot;none&quot;</span></span><br><span class="line">            &#125;);</span><br><span class="line">            $(<span class="built_in">this</span>).children(<span class="string">&quot;img&quot;</span>).css(&#123;</span><br><span class="line">                border:<span class="string">&quot;1px red solid&quot;</span></span><br><span class="line">            &#125;);</span><br><span class="line">            $(<span class="built_in">this</span>).show();</span><br><span class="line">            $(<span class="string">&quot;#mediumImg&quot;</span>).attr(<span class="string">&quot;src&quot;</span>,$(<span class="built_in">this</span>).find(<span class="string">&quot;img&quot;</span>).attr(<span class="string">&quot;src&quot;</span>).replace(<span class="string">&quot;.jpg&quot;</span>,<span class="string">&quot;-m.jpg&quot;</span>));</span><br><span class="line">            <span class="keyword">if</span>($(<span class="built_in">this</span>).nextAll().length&gt;=<span class="number">4</span>)</span><br><span class="line">                $(<span class="built_in">this</span>).prevAll().hide();</span><br><span class="line">            curPic=$(<span class="built_in">this</span>).index();</span><br><span class="line">            check()</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        $(<span class="string">&quot;.forward&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            $($(<span class="string">&quot;#icon_list&gt;li&quot;</span>)[curPic+<span class="number">1</span>]).click();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        $(<span class="string">&quot;#preview&gt;h1&gt;a&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>($(<span class="built_in">this</span>).hasClass(<span class="string">&quot;backward&quot;</span>))</span><br><span class="line">                $($(<span class="string">&quot;#icon_list&gt;li&quot;</span>)[curPic-<span class="number">1</span>]).click();</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>($(<span class="built_in">this</span>).hasClass(<span class="string">&quot;forward&quot;</span>))</span><br><span class="line">                $($(<span class="string">&quot;#icon_list&gt;li&quot;</span>)[curPic+<span class="number">1</span>]).click();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        $(<span class="string">&quot;#icon_list&gt;li&quot;</span>)[<span class="number">0</span>].click();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">mymousemove</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">&quot;#maskTop&quot;</span>).hover(showIMG,hideIMG);</span><br><span class="line">        $(<span class="string">&quot;#maskTop&quot;</span>).on(<span class="string">&quot;mousemove&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> x=e.offsetX,y=e.offsetY;</span><br><span class="line">            <span class="keyword">var</span> seqX,seqY;</span><br><span class="line">            seqX=x-$(<span class="string">&quot;#mask&quot;</span>).width()/<span class="number">2</span>;</span><br><span class="line">            seqY=y-$(<span class="string">&quot;#mask&quot;</span>).height()/<span class="number">2</span>;</span><br><span class="line">            seqX=<span class="built_in">Math</span>.max(<span class="built_in">Math</span>.min(seqX,$(<span class="built_in">this</span>).width()-$(<span class="string">&quot;#mask&quot;</span>).width()),<span class="number">0</span>);</span><br><span class="line">            seqY=<span class="built_in">Math</span>.max(<span class="built_in">Math</span>.min(seqY,$(<span class="built_in">this</span>).height()-$(<span class="string">&quot;#mask&quot;</span>).height()),<span class="number">0</span>);</span><br><span class="line">            $(<span class="string">&quot;#mask&quot;</span>).css(&#123;</span><br><span class="line">                top:seqY,</span><br><span class="line">                left:seqX,</span><br><span class="line">            &#125;);</span><br><span class="line">            $(<span class="string">&quot;#largeImg&quot;</span>).css(&#123;</span><br><span class="line">                left: -$(<span class="string">&quot;#mask&quot;</span>).position().left/$(<span class="built_in">this</span>).width()*$(<span class="string">&quot;#largeImg&quot;</span>).width(),</span><br><span class="line">                top: -$(<span class="string">&quot;#mask&quot;</span>).position().top/$(<span class="built_in">this</span>).height()*$(<span class="string">&quot;#largeImg&quot;</span>).height()</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">showIMG</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            $(<span class="string">&quot;#mask&quot;</span>).css(<span class="string">&quot;display&quot;</span>,<span class="string">&quot;block&quot;</span>);</span><br><span class="line">            $(<span class="string">&quot;#largeImg&quot;</span>).attr(<span class="string">&quot;src&quot;</span>,$(<span class="string">&quot;#mediumImg&quot;</span>).attr(<span class="string">&quot;src&quot;</span>).replace(<span class="string">&quot;-m.jpg&quot;</span>,<span class="string">&quot;-l.jpg&quot;</span>));</span><br><span class="line">            $(<span class="string">&quot;#largeImg&quot;</span>).css(<span class="string">&quot;display&quot;</span>,<span class="string">&quot;block&quot;</span>);</span><br><span class="line">            $(<span class="string">&quot;#largeImgContainer&quot;</span>).show();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">hideIMG</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            $(<span class="string">&quot;#mask&quot;</span>).hide();</span><br><span class="line">            $(<span class="string">&quot;#largeImg&quot;</span>).css(&#123;<span class="attr">display</span>:<span class="string">&quot;none&quot;</span>,<span class="attr">position</span>:<span class="string">&quot;absolute&quot;</span>&#125;);</span><br><span class="line">            $(<span class="string">&quot;#largeImgContainer&quot;</span>).hide();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    hoverShowItem();</span><br><span class="line">    subsubshow();</span><br><span class="line">    inputShow();</span><br><span class="line">    sharemore();</span><br><span class="line">    selAddr();</span><br><span class="line">    chgPage();</span><br><span class="line">    minicar();</span><br><span class="line">    prew();</span><br><span class="line">    mymousemove();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">推荐阅读</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/尚硅谷JavaScript进阶版笔记/" rel="bookmark">尚硅谷 JavaScript 进阶版笔记</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/尚硅谷JavaScript基础版笔记/" rel="bookmark">尚硅谷 JavaScript 基础版笔记</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Html5的音视频标签与新增冷门标签/" rel="bookmark">Html5的音视频标签与新增冷门标签</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/尚硅谷Canvas学习笔记/" rel="bookmark">尚硅谷Canvas学习笔记</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/尚硅谷BootStrap笔记/" rel="bookmark">尚硅谷 BootStrap 笔记</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>LiuKairui
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://liukairui.cc/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/" title="尚硅谷 jQuery 笔记">http://liukairui.cc/尚硅谷jQuery笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/jQuery/" rel="tag"><i class="fa fa-tag"></i> jQuery</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%B0%9A%E7%A1%85%E8%B0%B7JavaScript%E8%BF%9B%E9%98%B6%E7%89%88%E7%AC%94%E8%AE%B0/" rel="prev" title="尚硅谷 JavaScript 进阶版笔记">
+                  <i class="fa fa-chevron-left"></i> 尚硅谷 JavaScript 进阶版笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">晋 ICP 备 19015041 号 - 2 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiuKairui</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div><script
+  async
+  src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+
+ 
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-precise-range-plugin@1.3.0/moment-precise-range.min.js"></script>
+<script>
+  function timer() {
+    var ages = moment.preciseDiff(moment(),moment(20201101,"YYYYMMDD"));
+    ages = ages.replace(/years?/, "年");
+    ages = ages.replace(/months?/, "月");
+    ages = ages.replace(/days?/, "天");
+    ages = ages.replace(/hours?/, "小时");
+    ages = ages.replace(/minutes?/, "分");
+    ages = ages.replace(/seconds?/, "秒");
+    ages = ages.replace(/\d+/g, '<span class="daysCnt" style="color:#1890ff">$&</span>');
+    div.innerHTML = `我已在此等候你 ${ages}`;
+    div.className="workDays";
+  }
+  var div = document.createElement("div");
+  //插入到copyright之后
+  var copyright = document.querySelector(".copyright");
+  document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+  timer();
+  setInterval("timer()",1000)
+</script>
+
+
+ 
+<script>
+  var beian=document.querySelector("body > footer > div > div.beian > a");
+  var cpr=document.querySelector("body > footer > div > div.copyright");
+  cpr.appendChild(beian);
+  document.querySelector("#busuanzi_container_site_uv > span.post-meta-item-icon").remove();
+  document.querySelector("#busuanzi_container_site_pv > span.post-meta-item-icon").remove();
+  var cnz=document.querySelector(".workDays");//.parentNode;
+  var bsz=document.querySelector(".busuanzi-count");
+  if(cnz!=null&&bsz!=null){
+    cnz.parentNode.insertBefore(bsz,cnz);
+    //console.log("***",cnz.parentNode.insertBefore(bsz,cnz));
+  }
+</script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.2/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'dark',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+
+  <script>
+    NProgress.configure({
+      showSpinner: true
+    });
+    NProgress.start();
+    document.addEventListener('readystatechange', () => {
+      if (document.readyState === 'interactive') {
+        NProgress.inc(0.8);
+      }
+      if (document.readyState === 'complete') {
+        NProgress.done();
+      }
+    });
+    document.addEventListener('pjax:send', () => {
+      NProgress.start();
+    });
+    document.addEventListener('pjax:success', () => {
+      NProgress.done();
+    });
+  </script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <div style="display: none;">
+    <script data-pjax src="//s95.cnzz.com/z_stat.php?id=1279392499&web_id=1279392499"></script>
+  </div>
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({"enable":true,"appId":"ABKlVtS4cyaWYEwunPyK3sXt-9Nh9j0Va","appKey":"xxGXdTTEGEVifs2TLB35844I","serverURLs":"https://abklvts4.lc-cn-e1-shared.com","placeholder":"请开始你的表演","avatar":"identicon","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[]}, {
+      el: '#valine-comments',
+      path: "/%E5%B0%9A%E7%A1%85%E8%B0%B7jQuery%E7%AC%94%E8%AE%B0/",
+      serverURLs: "https://abklvts4.lc-cn-e1-shared.com"
+    }));
+  }, window.Valine);
+});
+</script>
+
+
+
+
+  <script async src="/js/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+  <script src="https://liukairuicc-1256424792.cos.ap-nanjing.myqcloud.com/wobblewindow.js"></script>
+  <script>
+    //只在桌面版网页启用特效 记得同步到header.njk
+    if( window.innerWidth > 768  ){
+      $(document).ready(function () {
+        
+          $('body>main>header').wobbleWindow({
+            radius: 50,
+            movementTop: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+
+        //
+        //  $('body>main>header>aside').wobbleWindow({
+        //    radius: 50,
+        //    movementLeft: false,
+        //    movementTop: false,
+        //    movementBottom: false,
+        //    position: 'fixed',
+        //    debug: false,
+        //  });
+        //
+
+        
+          $('body>footer').wobbleWindow({
+            radius: 50,
+            movementBottom: false,
+            movementLeft: false,
+            movementRight: false,
+            debug: false,
+          });
+        
+      });
+    }
+  </script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>
